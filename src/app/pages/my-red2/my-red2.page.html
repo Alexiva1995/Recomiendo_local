@@ -1,0 +1,50 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  mode="ios" class="new-background-color">
+    <ion-buttons slot="start" class="color">
+      <ion-back-button text="" style="color: #fff; font-size: 13px;" ></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="title">Mi red > {{user.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="contenedor">
+    <div class="contenedor-buscar">
+      <ion-searchbar placeholder="Buscar amigos..." (ionChange)='search()' [(ngModel)]="searchTerm"></ion-searchbar>
+    </div>
+
+
+
+    <ion-list>
+      <ng-container *ngIf="people.length > 0">
+        <ion-item *ngFor="let item of searchResult">
+          <div style="position: relative;">
+            <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
+              <img src="assets/img/icon/usuario.png">
+            </ion-thumbnail>
+            <ion-badge class="detalle-number" color="danger">
+              <ion-icon src="assets/img/icon/usuario.svg"></ion-icon>
+              {{item.red}}
+            </ion-badge>
+          </div>
+          <ion-label>
+            <h3 style="font-size: 18px;">{{item.name}}</h3>
+            <img class="btn-food" src="assets/img/icon/miredbtn2.svg" (click)="getID(item)">
+            <p style="color: #C0C0C0; font-size: 15px;">{{item.name}}</p>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+
+      <ng-container *ngIf="people.length === 0">
+        <p class="ion-text-center">
+          Aun no ha invitado amigos
+        </p>
+      </ng-container>
+
+    </ion-list>
+
+
+
+  </div>
+</ion-content>

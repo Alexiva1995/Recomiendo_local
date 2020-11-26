@@ -1,0 +1,63 @@
+<ion-content>
+  <ion-toolbar mode='ios'>
+    <ion-buttons slot="start" class="color">
+      <ion-back-button text="" defaultHref="/app/tabs/home" style="color: #fff;"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <img src="./../../../assets/img/mi-espacio.png" style="width: 30px;">
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Invita a tus amigos</ion-title>
+  </ion-toolbar>
+
+  <div class="container">
+    <p style="margin-top: 0;">
+      ¡Gana 50 <img src="assets/img/moneda.png" alt="" style="width: 20px;">
+      por recomendar el App a tus amigos!
+    </p>
+
+    <p style="font-size: 15px; color:#C0C0C0;">
+      Por cada vez que recomiendes el App a tus amigos ganaras 50 Recos, los cuales podrás usar para ganar premios.
+    </p>
+
+    <ion-list class="qr-input">
+      <ion-item lines="none">
+        <div>
+          <ion-label style="color: #C0C0C0; margin-top: .2rem;" position="fixed">Tu codigo</ion-label>
+          <ion-input readonly>Rec-{{user.user.id}}</ion-input>
+        </div>
+        <ion-button style="color: #FF6E12; font-size: 13px;" slot="end" fill="clear" (click)="copy()">
+          Copiar
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+
+    <p style="color:#C0C0C0 ; font-size: 15px;">
+      Comparte el App y gana
+    </p>
+    <ion-button expand="block" shape="round" mode='ios' class="whatsapp" (click)="shareWs()">
+      <ion-icon slot="start" src="./../../../assets/img/whatsapp.svg"></ion-icon>
+      WHATSAPP
+    </ion-button>
+    <ion-button color="facebook" expand="block" shape="round" mode='ios' (click)="sharefb()">
+      <ion-icon slot="start" src="./../../../assets/img/facebook.svg"></ion-icon>
+      FACEBOOK
+    </ion-button>
+    <ion-button class="gmail" expand="block" shape="round" mode='ios' fill="outline" (click)="shareGmail()">
+      <ion-icon slot="start" src="./../../../assets/img/gmail.svg"></ion-icon>
+      GMAIL
+    </ion-button>
+    <ion-button expand="block" shape="round" mode='ios' class="sms" (click)="sharesms()">
+      <ion-icon slot="start" src="./../../../assets/img/sms.svg"></ion-icon>
+      SMS
+    </ion-button>
+
+    <div class="container-qr ion-text-center">
+      <p> Tus amigos también pueden escanear este código QR para seguirte. </p>
+      <qrcode #qrElement id="canvas" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+  </div>
+</ion-content>

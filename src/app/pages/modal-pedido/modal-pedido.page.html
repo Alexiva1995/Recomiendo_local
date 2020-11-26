@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="naranja">
+    <ion-buttons slot="start">
+      <ion-icon name="close-outline" (click)="salir()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-center" mode="ios" style="font-size: 18px;">Tu pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="contenedor">
+    <div class="contenedor-cabezera" *ngIf="listProducts.length>0">
+      <div>
+        <img [src]="'https://valdusoft.com/recomiendo/company/image/'+this.local.photo_company[0].name" alt="logo"
+          class="avatar" style="margin-right: 0.3rem;width: 48px;
+          height: 48px;">
+      </div>
+      <div>
+        <h2 style="margin: 0;"> {{local.name | titlecase}}</h2>
+        <p style="margin: 0; color: #FF8800;" (click)="salir()">Volver a la tienda</p>
+      </div>
+    </div>
+    <ng-container *ngIf="listProducts.length>0">
+      <div class="contenedor-tarjeta" *ngFor="let item of listProducts;let i=index">
+        <div class="contenedor-info">
+          <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0].name"
+            style="width: 57px; height: 57px;border-radius: 5px;" />
+          <div style="margin-left: 0.3rem;">
+            <p style="margin: 0; font-size: 18px;">{{item.name | titlecase }}</p>
+            <p style="    margin: 0;
+            color: #FF8800;
+            font: normal normal bold 15px/20px Open Sans;
+            letter-spacing: -0.6px;
+            font-size: 18px;">{{item.price || 0}}$</p>
+          </div>
+        </div>
+        <div class="contenedor-btn">
+          <ion-buttons style="background: #F3F3F3 0% 0% no-repeat padding-box;border-radius: 5px;; margin: 0 auto;">
+            <ion-button color="dark" [disabled]='item.quantity == 1' (click)="remove(i)">
+              <ion-icon name="remove-outline"></ion-icon>
+            </ion-button>
+            <p style="margin: 0; color: #C0C0C0;"> {{item.quantity}} </p>
+
+            <ion-button color="dark" (click)="add(i)">
+              <ion-icon name="add-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="listProducts.length == 0">
+      <div style="margin: 0 auto;
+      display: block;
+      top: 4rem;
+      position: relative;
+      width: 14rem;">
+        <img src="./assets/img/comprador.svg" alt="" style="    width: 150px;
+        display: block;
+        margin: 0 auto;">
+        <p style="color: black;
+        font-size: 1.5rem;
+        text-align: center;">No tienes productos <br>
+          en tu pedido</p>
+      </div>
+
+    </ng-container>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <div class="container-footer" *ngIf="listProducts.length != 0">
+    <div class="container-footer-body">
+      <div class="contenedor-valor">
+        <p style="margin: 0"> {{listProducts.length}} </p>
+      </div>
+      <div>
+        <ion-button class="btn-food" (click)="purchase()">Realizar pedido</ion-button>
+      </div>
+      <div>
+        <p style="margin-right: 1rem; color: #FF5A31; font-size: 18px;">${{calculatedTotal() || 0}}</p>
+      </div>
+    </div>
+  </div>
+  <ion-button style="color: #C0C0C0;" expand="block" fill="clear" shape="round" (click)="clear()"
+    *ngIf="listProducts.length != 0">
+    Limpiar pedido
+  </ion-button>
+  <ion-button expand="block" fill="clear" shape="round" (click)="salir()" *ngIf="listProducts.length == 0" style="--border-radius: 20px;
+  --background: transparent linear-gradient(-90deg, #ffb300 0%, #ff2424 100%) 0% 0% no-repeat padding-box;
+  margin: 0px;
+  position: relative;
+  bottom: 0rem;
+  color: white;
+  height: 3rem;">
+    Volver a la tienda
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,90 @@
+.naranja{
+    color: white;
+    font-size: 25px;
+    // padding: 0.5rem;
+    --background:linear-gradient(160deg, #FF2424 0%, #FFB300 100%) 0% 0% no-repeat padding-box;
+}
+
+.contenedor{
+    margin-left: 1rem;
+}
+
+.avatar{
+    text-align: left;
+    // margin-left: 1rem;
+    // margin-bottom: 8px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 6px;
+    box-sizing: border-box;
+    box-shadow:1px 1px 8px 1px rgba(0, 0, 0, 0.41)
+}
+// clase reutilizada
+
+.iconogrande{
+    font-size: 6rem;
+}
+
+.centrar-enmedio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.columna-dividir{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    p:nth-child(2){
+       color: #FF5A31;
+    }
+    p:nth-child(3){
+        color: #FF5A31;
+     }
+}
+
+.titulo-columna{
+    display: flex;
+    justify-content: space-around;
+    p{
+        margin: 0;
+        margin-top: 0.5rem;
+    }
+}
+
+.dividir-opcion{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tarjeta{
+background: #FFFFFF 0% 0% no-repeat padding-box;
+box-shadow: 0px 0px 15px #0029;
+border-radius: 20px;
+width: 90%;
+margin: 0 auto;
+margin-top: 1rem;
+}
+
+.container-qr{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        text-align: center;
+    }
+    img{
+        padding-top: 1rem;
+        height: 13rem;
+    }
+}
+
+.txt-footer{
+    display: flex;
+    flex-direction: column;
+}

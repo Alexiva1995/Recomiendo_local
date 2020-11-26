@@ -1,0 +1,36 @@
+ion-content {
+  --background: url('../../../../assets/img/congratulations/felicitaciones.png') no-repeat center center / cover;
+  padding: .5rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+h1 {
+  color: white;
+  font: Light Open Sans;
+  text-align: center;
+  margin-top: 5rem;
+}
+
+p {
+  text-align: center;
+  font: Light 15px/20px Open Sans;
+  letter-spacing: 0px;
+  color: white;
+  font-weight: lighter;
+}
+
+.content {
+  display: block;
+  text-align: center;
+}
+
+ion-button .new {
+  --background: linear-gradient(90deg, rgba(255, 36, 36, 1) 0%, rgba(255, 187, 0, 1) 80%);
+}

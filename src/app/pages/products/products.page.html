@@ -1,0 +1,112 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode='ios' class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <!-- <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title>Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-slides #slides pager="false">
+
+    <ion-slide>
+
+      <h2 class="slide-title">
+        <ng-container>
+          <ion-searchbar placeholder="Buscar productos..." (ionChange)='search()' [(ngModel)]="searchTerm">
+          </ion-searchbar>
+        </ng-container>
+      </h2>
+
+      <ion-segment [(ngModel)]="segment" color="primary">
+        <ion-segment-button value="myProducts">
+          <ion-label style="color: #000;text-transform: initial;">He <br> recomendado</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="friends">
+          <ion-label style="color: #000;text-transform: initial;">Me han <br> Recomendado</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <p style="    font-size: 15px;
+        text-align: left;
+        padding: 0 1rem;">
+        En esta sección encontrarás todos los <br> productos que he recomendado a mis amigos, <br> podrás verlos,
+        añadirlos a tu pedido y <br> compartirlos.
+      </p>
+      <ion-grid *ngIf="segment === 'friends'">
+        <ion-row>
+          <ng-container *ngIf="ProductsRecommendedByFriends.length > 0">
+            <ion-col size="4" *ngFor="let item of searchResultProductsRecommended"
+              (click)="modalproductosdetalles(item)">
+              <div style="overflow: hidden; position: relative;border-radius: 20px;">
+                <div class="slide-precio">
+                  <p style="color: white;">{{item.rating_quality | number:'1.1-1'}} <ion-icon name="star"
+                      style="color: #FFB300;"></ion-icon>
+                  </p>
+                </div>
+
+                <!--  <ion-icon src="./assets/img/compartir.svg" class="slide-share"></ion-icon> -->
+
+                <div class="slide-titulo">
+                  <p>{{item.name}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.id+'.jpg'" style=" min-height: 122px;min-width: 104px;
+                border-radius: 20px;" onerror="this.src='https://via.placeholder.com/123'">
+              </div>
+            </ion-col>
+          </ng-container>
+          <ng-container *ngIf="ProductsRecommendedByFriends.length === 0">
+            <ion-col size="12">
+              Aun no ha recomendado productos
+            </ion-col>
+          </ng-container>
+        </ion-row>
+
+      </ion-grid>
+      <ion-grid *ngIf="segment === 'myProducts'">
+        <ion-row>
+          <ng-container *ngIf="searchResultMyProductsRecommended.length > 0">
+            <ion-col size="4" *ngFor="let item of searchResultMyProductsRecommended"
+              (click)="modalproductosdetalles(item)">
+              <div style="overflow: hidden; position: relative;border-radius: 20px;">
+                <div class="slide-precio">
+                  <p style="color: white;">{{item.rating_quality | number:'1.1-1'}} <ion-icon name="star"
+                      style="color: #FFB300;"></ion-icon>
+                  </p>
+                </div>
+
+                <!--  <ion-icon src="./assets/img/compartir.svg" class="slide-share"></ion-icon> -->
+
+                <div class="slide-titulo">
+                  <p>{{item.name}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.id+'.jpg'" style="min-height: 122px;min-width: 104px;
+                border-radius: 20px;" onerror="this.src='https://via.placeholder.com/123'" />
+              </div>
+            </ion-col>
+          </ng-container>
+          <ng-container *ngIf="searchResultMyProductsRecommended.length === 0">
+            <ion-col size="12">
+              Aun no ha recomendado productos
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+  </ion-slides>
+
+
+</ion-content>
+<ion-footer class="ion-no-border">
+
+
+
+</ion-footer>

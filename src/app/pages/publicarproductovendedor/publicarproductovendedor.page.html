@@ -1,0 +1,97 @@
+
+<ion-content class="new-background-color">
+
+  <ion-toolbar class="new-background-color">
+    <div class="ajustar">
+        <div>
+          <!-- <ion-buttons slot="start" class="color">
+            <ion-back-button defaultHref="/" style="color: #fff;"></ion-back-button>
+          </ion-buttons> -->
+        </div>
+        <div>
+          <ion-title>Publicar Producto</ion-title>
+        </div>
+        <div>
+        </div>
+    </div>
+  </ion-toolbar>
+
+    <div class="contenedor">
+      <div class="contenedor-buscar">
+        <!-- <ion-searchbar   placeholder="Buscar amigos..."></ion-searchbar> -->
+      </div>
+  
+  
+  
+      <form [formGroup]="form">
+        <ion-list>
+
+          <ion-item style="width: 90%; margin: 0 auto;">
+            <ion-label position="stacked" >Nombre del producto *</ion-label>
+            <ion-input formControlName="name" placeholder="Ingresa que producto vas publicar"></ion-input>
+          </ion-item>
+
+          <ion-item style="width: 90%; margin: 0 auto;">
+            <ion-label position="stacked" >Descripción del producto *</ion-label>
+            <ion-input formControlName="description" placeholder="Ingresa una breve descripción"></ion-input>
+          </ion-item>
+
+          <ion-item style="width: 90%; margin: 0 auto;">
+            <ion-label position="stacked">Categoría del producto *</ion-label>
+            <ion-select (ionChange)=Addsubcategories($event)>
+              <ion-select-option value={{item.id}} *ngFor="let item of categories.subcategories">
+               {{item.name}} 
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+
+          <ion-item style="width: 90%; margin: 0 auto;">
+            <ion-label position="stacked" >Precio del producto *</ion-label>
+            <ion-input type="number" formControlName="price"  placeholder="Ingresa el precio del producto">
+              <span style="color: #FFB300;position: absolute;right: 0px;">COP</span>
+            </ion-input>
+          </ion-item>
+
+          <ion-item style="width: 90%; margin: 0 auto;">
+            <ion-label position="stacked" style="font-size: 22px ; opacity: 1;">Subir imagen *</ion-label>
+            <ion-input style="--placeholder-opacity:1;" placeholder="Toma una foto o elige una imagen" disabled></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </form>
+
+      <div class="contenedor-imagenes">
+        <div  (click)="captureImage(1)" style="display: block; margin: 0 auto;">
+          <img class="box" [src]="imgSelected" 
+          onerror="this.src='https://simpleicon.com/wp-content/uploads/cloud-upload-2.png'">
+        </div>
+        <!-- <div class="box" (click)="captureImage(2)">
+          <img [src]="imgSelected2" 
+          onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'">
+        </div>
+        <div class="box" (click)="captureImage(3)" >
+          <img [src]="imgSelected3" 
+          onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'">
+        </div> -->
+      </div>
+  
+      <ion-button style="
+      margin: 0 auto;
+    height: 60px;
+    width: 90%;
+    color: #fff;
+    --border-radius: 20px;
+    font-size: 23px;
+    --background-hover: none;
+    margin-top: 2rem; "
+      expand="block" shape="block" 
+      [disabled]="form.status == 'INVALID'"
+      (click)="saveData()" class="finalUser second" mode='ios'>
+        Guardar
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-button>
+
+
+    </div>  
+</ion-content>

@@ -1,0 +1,242 @@
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+.swiper-slide {
+  display: block;
+}
+
+.slide-title {
+  /* margin-top: 2.8rem; */
+  padding: 0 1rem;
+  border-bottom: solid 1px;
+  opacity: 0.5;
+  padding-bottom: 0.5rem;
+}
+
+.slide-image {
+  max-height: 45%;
+  /*   max-width: 60%; */
+  margin: 36px 0;
+  pointer-events: none;
+}
+
+b {
+  font-weight: 500;
+}
+
+p {
+  text-align: center;
+  font: Light 15px/20px Open Sans;
+  letter-spacing: 0px;
+  color: #c0c0c0;
+  /*   padding: 0 40px; */
+  font-size: 0.8rem;
+  b {
+    color: var(--ion-text-color, #000000);
+  }
+}
+
+ion-content {
+  // --background: linear-gradient(90deg, rgba(255, 36, 36, 1) 0%, rgba(255, 187, 0, 1) 80%);
+  --background: linear-gradient(
+    90deg,
+    rgba(255, 36, 36, 1) 0%,
+    rgba(255, 187, 0, 1) 80%
+  );
+  padding: 0.5rem;
+}
+
+ion-slides {
+  height: 110%;
+  background: white;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  box-shadow: 0px -3px 15px #00000029;
+  overflow-y: scroll;
+
+  .swiper-pagination {
+    position: relative !important;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+ion-title {
+  color: white;
+  font: Regular 21px/26px Quicksand;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+
+ion-button {
+  --ion-color-base: white !important;
+  margin: 0.5rem 0.5rem;
+}
+
+.finalUser {
+  --background: linear-gradient(
+    90deg,
+    rgba(255, 36, 36, 1) 0%,
+    rgba(255, 187, 0, 1) 80%
+  );
+}
+.second {
+  margin-top: 1.7rem;
+}
+.arrow-right {
+  position: absolute;
+  top: 94%;
+  right: 10%;
+}
+.arrow-left {
+  position: absolute;
+  top: 93.5%;
+  left: 10%;
+}
+
+ion-searchbar {
+  --background: #f3f3f3 0% 0% no-repeat padding-box;
+  --border-radius: 21px;
+  text-align: left;
+}
+.slide-share {
+  text-align: center;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  top: 1.2rem;
+  width: 17px;
+  font-size: 16px;
+  height: 14px;
+  padding: 4px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: white;
+}
+.slide-precio {
+  position: absolute;
+  color: #fff;
+  padding: 0.2rem;
+  padding-right: 0.6rem;
+  top: 1.2rem;
+  border-radius: 0px 15px 15px 0;
+  background-image: linear-gradient(190deg, #ffb300 0%, #ff5a31 100%);
+  p {
+    margin: 0;
+    font-size: 0.9375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    width: 20px;
+  }
+}
+
+.slide-titulo {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  bottom: 0.2rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #00000029;
+}
+
+.contenedor-tarjeta {
+  display: flex;
+  justify-content: space-between;
+  width: 90vw;
+  // background: red;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.12);
+  margin-left: 1rem;
+}
+
+.btn-food {
+  // viejo
+  width: 75%;
+  height: 33px;
+  --border-radius: 5px;
+  --background: transparent linear-gradient(-90deg, #ffb300 0%, #ff2424 100%) 0%
+    0% no-repeat padding-box;
+  margin: 15px 10px !important;
+}
+
+.contenedor-detalles {
+  // display: flex;
+  // justify-content: space-around;
+  // width: 90vw;
+  // border-bottom: solid 1px #00000029;
+  /* width: 100%; */
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  padding-left: 2rem;
+  p {
+    color: #000;
+  }
+}
+
+.rayas {
+  border-bottom: solid 0.5px #00000029;
+  height: 35px;
+} 
+
+.rayas2{
+  border-bottom: solid 0.5px #00000029;
+  height: 4px;
+} 
+
+.contenedor-productos {
+  display: flex;
+  // width: 90vw;
+  justify-content: space-between;
+  // padding: 0.35rem 0;
+  padding: 0.35rem 0 0.45rem 0rem;
+  //border-bottom: solid 0.5px #00000029;
+  align-items: center;
+  // &:last-child{
+  //   border-bottom: none;
+  // }
+}
+
+.contenedor-subproductos {
+  // antes
+  display: flex;
+  // background: red;
+  align-items: center;
+  width: 9rem;
+  margin-left: 2rem;
+  // ahora
+  // width: 140px;
+  // background: palevioletred;
+  // display: inline;
+}
+
+// ion-grid{
+//  padding: 0;
+// }
+
+.preciostabla{
+  color: #FF5A31;
+  /* width: 50%; */
+  display: flex;
+  justify-content: space-between;
+  /* background: red; */
+  width: 83px;
+  margin-right: 2rem; 
+}
+.tablatitulo{
+  display: flex;
+}
+
+.arrow-food{
+  position: absolute;
+    right: 1rem;
+    top: 40%;
+    color: #FF5A31;
+}

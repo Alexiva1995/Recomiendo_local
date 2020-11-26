@@ -1,0 +1,109 @@
+<ion-content>
+  <ion-grid fixed="true">
+    <ion-row>
+      <ion-col style="padding: 0;">
+        <div class="fondo">
+
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-back-button text="" icon="arrow-back" mode="ios"></ion-back-button>
+            </ion-buttons>
+          </ion-toolbar>
+          <div class="signup-logo">
+            <img src="assets/img/ucono-blanco.png" alt="Ionic Logo">
+            <p style="font-size: 18px;">
+              Registrate
+            </p>
+          </div>
+          <form [formGroup]="formGroup">
+            <ion-list lines="none">
+              <ion-item [ngClass]="{'errorInput': errorControl.name.errors?.required && !errorControl.name.pristine}">
+                <ion-label position="stacked" style="font-size: 21px;">Usuario *</ion-label>
+                <ion-input [ngClass]="{
+                  'disminuirTamano': this.formGroup.controls.name.value.length === 0 , 
+                  'aumentarTamano': this.formGroup.controls.name.value.length !== 0  }" formControlName="name"
+                  placeholder="Ingresa un nombre de usuario *" inputmode="text" type="text">
+                </ion-input>
+              </ion-item>
+              <ion-text color="danger">
+                <p style="margin: 0; font-size: 14px; color: #FFBB00;"
+                  *ngIf="errorControl.name.errors?.required && !errorControl.name.pristine" class="ion-padding-start">
+                  Usuario es requerido
+                </p>
+              </ion-text>
+
+              <ion-item [ngClass]="{'errorInput': errorControl.email.errors?.pattern}">
+                <ion-label position="stacked" style="font-size: 21px;">Correo Electronico *</ion-label>
+                <ion-input [ngClass]="{
+                  'disminuirTamano': this.formGroup.controls.email.value.length === 0 , 
+                  'aumentarTamano': this.formGroup.controls.email.value.length !== 0  }" formControlName="email"
+                  placeholder="Correo Electronico *" inputmode="email" type="email">
+                </ion-input>
+              </ion-item>
+              <ion-text color="danger">
+                <p style="margin: 0; font-size: 14px; color: #FFBB00;" [hidden]="!errorControl.email.errors?.pattern"
+                  class="ion-padding-start">
+                  Ingrese un correo valido
+                </p>
+              </ion-text>
+              <ion-item [ngClass]="{'errorInput': errorControl.password.errors?.minlength}">
+                <ion-label position="stacked" style="font-size: 21px;">Contraseña *</ion-label>
+                <ion-input [ngClass]="{
+                  'disminuirTamano': this.formGroup.controls.password.value.length === 0 , 
+                  'aumentarTamano': this.formGroup.controls.password.value.length !== 0  }" formControlName="password"
+                  placeholder="Ingresa una contraseña *" inputmode="password" type="password">
+                </ion-input>
+              </ion-item>
+              <ion-text color="danger">
+                <p style="margin: 0; font-size: 14px; color: #FFBB00;"
+                  [hidden]="!errorControl.password.errors?.minlength" class="ion-padding-start">
+                  Contraseña debe contener mínimo 6 caracteres
+                </p>
+              </ion-text>
+              <ion-item
+                [ngClass]="{'errorInput': errorControl.confirm_password.value != errorControl.password.value && !errorControl.confirm_password.pristine}">
+                <ion-label position="stacked" style="font-size: 21px;">Repetir Contraseña *</ion-label>
+                <ion-input [ngClass]="{
+                  'disminuirTamano': this.formGroup.controls.confirm_password.value.length === 0 , 
+                  'aumentarTamano': this.formGroup.controls.confirm_password.value.length !== 0  }"
+                  formControlName="confirm_password" inputmode="password" type="password"
+                  placeholder='Repite la contraseña *'>
+                </ion-input>
+              </ion-item>
+              <ion-text color="danger">
+                <p style="margin: 0; font-size: 14px; color: #FFBB00;" [hidden]="!errorControl.confirm_password.errors?.confirmedValidator && 
+                !errorControl.confirm_password.errors?.minlength
+                " class="ion-padding-start">
+                  Las contraseñas deben coincidir
+                </p>
+              </ion-text>
+
+            </ion-list>
+          </form>
+
+        </div>
+        <div style="margin-top: 48px;">
+          <ion-button style="margin: 0 auto; height: 60px; color: #fff; 
+          --border-radius: 20px; --background-hover:none;" expand="block" shape="round" class="finalUser second"
+            mode='ios' (click)="onSignup()" [disabled]="formGroup.status == 'INVALID' || !terms">REGÍSTRATE AHORA
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </ion-button>
+
+          <ion-item lines="none">
+            <div class="container-terms">
+              <ion-checkbox color="primary" mode="md" [(ngModel)]="terms"></ion-checkbox>
+              <p class="terms">He leído y acepto los <span style="color: #FFBB00;">
+                  términos y condiciones</span> </p>
+            </div>
+          </ion-item>
+          <p class="login" (click)="goTo('/login')" style="font-size: 15px;">¿Ya tienes una cuenta? <b> Ingresa </b></p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+
+</ion-footer>

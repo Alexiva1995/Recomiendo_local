@@ -1,0 +1,116 @@
+<ion-content class="fondo">
+  <div class="contenedor">
+    <div class="contenedor-logo">
+      <h1>¡Cuéntanos tu <br> experiencia y gana!</h1>
+      <p>¡Califica tu pedido en <b>{{local.name}}</b> y gana! Ayuda a mejorar el funcionamiento del local y sus
+        productos.
+      </p>
+    </div>
+
+    <div style="border-bottom: 1px solid white"></div>
+
+    <div class="contenedor-lateral">
+      <div class="caja-precio">
+        <div class="slide-precio">
+          <p>
+            <img src="assets/img/moneda.png" alt="">
+            {{getUser().balance || 0}}
+          </p>
+        </div>
+      </div>
+      <div class="imagen-moneda">
+        <img src="assets/img/monedainicial.png" class="center-image" />
+      </div>
+      <div class="caja-pasos">
+        <span class="contenedor-caja-pasos">
+          <ion-icon style="font-size: 20px;" name="star"></ion-icon>
+          1/4
+        </span>
+      </div>
+    </div>
+
+    <h2>Califica por tú experiencia</h2>
+
+
+
+    <div class="carrousel1">
+      <ion-slides #slide>
+        <ion-slide *ngFor="let item of products">
+          <div style="overflow: hidden; position: relative;">
+            <div class="slide-precio2">
+              <p>{{item.price}} $</p>
+            </div>
+            <div class="slide-titulo2">
+              <p>{{item.name}}</p>
+            </div>
+            <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0].name"
+            style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 20px;"  />
+          </div>
+        </ion-slide>
+
+
+      </ion-slides>
+    </div>
+
+
+
+    <p class="subtitle">Atención</p>
+    <div class="puntuacion">
+      <ion-icon name="star-outline" (click)="puntuaratencion(1)" [hidden]="staratencion1"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuaratencion(1)" [hidden]="!staratencion1"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuaratencion(2)" [hidden]="staratencion2"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuaratencion(2)" [hidden]="!staratencion2"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuaratencion(3)" [hidden]="staratencion3"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuaratencion(3)" [hidden]="!staratencion3"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuaratencion(4)" [hidden]="staratencion4"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuaratencion(4)" [hidden]="!staratencion4"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuaratencion(5)" [hidden]="staratencion5"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuaratencion(5)" [hidden]="!staratencion5"></ion-icon>
+    </div>
+
+    <p class="subtitle">Precio</p>
+    <div class="puntuacion">
+      <ion-icon name="star-outline" (click)="puntuarprecio(1)" [hidden]="starprecio1"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarprecio(1)" [hidden]="!starprecio1"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarprecio(2)" [hidden]="starprecio2"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarprecio(2)" [hidden]="!starprecio2"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarprecio(3)" [hidden]="starprecio3"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarprecio(3)" [hidden]="!starprecio3"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarprecio(4)" [hidden]="starprecio4"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarprecio(4)" [hidden]="!starprecio4"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarprecio(5)" [hidden]="starprecio5"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarprecio(5)" [hidden]="!starprecio5"></ion-icon>
+    </div>
+
+
+    <p class="subtitle">Calidad</p>
+    <div class="puntuacion">
+      <ion-icon name="star-outline" (click)="puntuarcalida(1)" [hidden]="starcalida1"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarcalida(1)" [hidden]="!starcalida1"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarcalida(2)" [hidden]="starcalida2"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarcalida(2)" [hidden]="!starcalida2"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarcalida(3)" [hidden]="starcalida3"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarcalida(3)" [hidden]="!starcalida3"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarcalida(4)" [hidden]="starcalida4"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarcalida(4)" [hidden]="!starcalida4"></ion-icon>
+      <ion-icon name="star-outline" (click)="puntuarcalida(5)" [hidden]="starcalida5"></ion-icon>
+      <ion-icon name="star" style="color: yellow;" (click)="puntuarcalida(5)" [hidden]="!starcalida5"></ion-icon>
+    </div>
+
+
+    <form [formGroup]="form">
+      <div class="form-area">
+        <ion-item style="--background: #FF7100;" lines="none">
+          <ion-textarea formControlName="comment" style="color: white;" placeholder="Agrega un comentario...">
+          </ion-textarea>
+        </ion-item>
+      </div>
+    </form>
+
+    <ion-button style="margin: 0 auto; padding: 0 1rem;  height: 60px;
+  --border-radius: 23px;" class="finalUser" expand="block" shape="round" mode='ios' (click)=sendQualify()>
+      CONTINUAR
+    </ion-button>
+
+  </div>
+</ion-content>

@@ -1,0 +1,116 @@
+<div class="fondo">
+  <ion-toolbar mode='ios'>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Recomiendo</ion-title>
+  </ion-toolbar>
+
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="true">
+    <ion-slide>
+
+      <h2 class="slide-title">
+        <!--    <b class="ion-padding"> ¡Hola {{user.email}} que gusto que estés aquí!</b>  -->
+      </h2>
+      <p style="opacity: 0.8 ;">
+        Por favor dinos ¿Cómo conociste a Recomiendo? ¡Te premiaremos por ayudarnos!.
+      </p>
+      <hr size="1">
+      <!-- <img src="assets/img/recomendar-lugares.png" class="slide-image" />
+        -->
+      <ion-item class="item-checkbox">
+        <ion-checkbox slot="start" [(ngModel)]="option_" (ionFocus)="option = false"></ion-checkbox>
+        <ion-label>
+          <h3>Me la recomendaron</h3>
+          <p>Alguien me recomendo la aplicacion y me dio un codigo QR</p>
+        </ion-label>
+      </ion-item>
+      <ion-list class="qr-input scale-up-ver-top" [hidden]="!option_">
+        <ion-item lines="none">
+          <div>
+            <ion-label position="floating">Ingresa el codigo</ion-label>
+            <ion-input [(ngModel)]="idRefered" inputmode="text" type="text">
+            </ion-input>
+          </div>
+          <!-- <ion-button slot="end" fill="clear">
+            Pegar
+          </ion-button> -->
+        </ion-item>
+        <ion-item-divider>
+          <h5 style="margin: 0 auto;">O</h5>
+        </ion-item-divider>
+
+        <ion-button expand="block" class="btn-qr" (click)="qrScan()">Escanea el QR
+          <ion-icon name="qr-code" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+      <ion-item class="item-checkbox">
+        <ion-checkbox slot="start" [(ngModel)]="option" (ionFocus)="option_ = false"></ion-checkbox>
+        <ion-label>
+          <h3>Orgánicamente</h3>
+          <p>Escuche de la aplicación por ahí y quise probarla</p>
+
+        </ion-label>
+      </ion-item>
+      <!-- <ion-icon name="arrow-forward" class="arrow-right" color="primary" (click)="adelante()" *ngIf="!firstTime">
+      </ion-icon>
+      <ion-icon name="arrow-forward" class="arrow-right" color="primary" (click)="startApp()" *ngIf="firstTime">
+      </ion-icon> -->
+      <ion-button style="margin: 0 auto; padding: 0 1rem;  height: 60px;
+        --background-hover:none;
+        --border-radius: 20px;" class="finalUser" expand="block" shape="round" mode='ios' (click)="adelante()"
+        *ngIf="option_ && idRefered || option && !idRefered">
+        CONTINUAR
+      </ion-button>
+      <!--  <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+    </ion-slide>
+    <ion-slide>
+
+      <h2 class="slide-title">
+        <b> ¡Bienvenidos!</b>
+      </h2>
+      <p style="opacity: 0.8 ;">
+        Todos hemos tenido un amigo que hace las mejores empanadas del mundo y hemos querido ayudarlo a promocionar su
+        producto, con RECOMIENDO lo vamos a poder hacer.
+      </p>
+      <img src="assets/img/recomendar-lugares.png" class="slide-image" />
+
+      <div class="arrow-opt">
+        <ion-icon name="arrow-back"  color="primary" (click)="atras()"></ion-icon>
+        <ion-icon name="arrow-forward" color="primary" (click)="adelante2()"></ion-icon>
+      </div>
+
+    </ion-slide>
+    <ion-slide>
+      <!-- *ngIf="!firstTime" -->
+      <h2 class="slide-title">
+        <b> ¡Interactúa y gana!</b>
+      </h2>
+      <p style="opacity: 0.8 ;">
+        Cada vez que interactúes con el App vas obteniendo puntos, puntos que puedes utilizar para reclamar tus
+        comidas
+        favoritas totalmente gratis, hacer recargas de tu celular o donarlos a una buena causa.
+      </p>
+      <img src="assets/img/interactua-y-gana.png" class="slide-image" />
+
+
+      <ion-icon name="arrow-back" class="arrow-left" color="primary" (click)="atras()"></ion-icon>
+
+      <ion-button style="margin: 0 auto; padding: 0 1rem;  height: 60px;
+          --background-hover:none;
+          --border-radius: 23px;" class="finalUser" expand="block" shape="round" mode='ios' (click)="startApp()">
+        EMPECEMOS
+      </ion-button>
+
+    </ion-slide>
+
+  </ion-slides>
+
+
+</div>

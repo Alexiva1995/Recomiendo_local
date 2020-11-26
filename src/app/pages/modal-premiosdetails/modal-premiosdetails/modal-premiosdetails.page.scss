@@ -1,0 +1,72 @@
+.contenedor {
+  margin-left: 1rem;
+}
+
+.dividir-opcion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personalizar-textarea {
+  --background: #f3f3f3;
+  color: #c0c0c0;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.slide-precio {
+  position: absolute;
+  color: #fff;
+  padding: 0.2rem;
+  padding-right: 0.6rem;
+  top: 2.2rem;
+  right: 0rem;
+  border-radius: 15px 0px 0px 15px;
+  background-image: linear-gradient(190deg, #ffb300 0%, #ff5a31 100%);
+  p {
+    margin: 0;
+    font-size: 0.9375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    width: 20px;
+  }
+}
+.avatar {
+  margin-left: 1rem;
+  margin-bottom: 8px;
+  background-color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  padding: 6px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.41);
+}
+
+.btn-food {
+  --border-radius: 5px;
+  width: 10rem;
+  --background: transparent linear-gradient(-90deg, #ffb300 0%, #ff2424 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.container-footer {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+// clase reutilizada
+.personalizar-btn {
+  --padding-start: 1rem;
+  --padding-bottom: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 1rem;
+}

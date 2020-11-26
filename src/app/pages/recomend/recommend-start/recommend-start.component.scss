@@ -1,0 +1,54 @@
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+ion-content {
+  --background: linear-gradient(90deg, rgba(255, 36, 36, 1) 0%, rgba(255, 187, 0, 1) 80%);
+  padding: .5rem;
+}
+
+ion-title {
+  color: white;
+  font: Regular 21px/26px Quicksand;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+}
+
+
+ion-button {
+  --background: linear-gradient(90deg, rgba(255, 36, 36, 1) 0%, rgba(255, 187, 0, 1) 80%);
+}
+
+.content {
+  background-image: url('../../../../assets/img/fondo-recomendar-productos.png');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: -1.55rem;
+  /* background-position: center; */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  height: 93.5%;
+}
+
+h2 {
+  color: white;
+  font: Light Open Sans;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font: Light 15px/20px Open Sans;
+  letter-spacing: 0px;
+  color: white;
+  font-size: .8rem;
+}
+
+
+
+img {
+  max-width: 68%;
+  margin: 25px auto;
+}

@@ -1,0 +1,224 @@
+<ion-content>
+  <div class="container-head"
+    [ngStyle]="{'background-image': 'url(https://valdusoft.com/recomiendo/company/image/'+this.banner.name+')'}">
+    <div style="display: flex ; align-items: center;">
+      <div (click)="atras()" style="margin-left: 1rem;">
+        <ion-icon style="color: #fff; font-size: 24px;" name="arrow-back-outline"></ion-icon>
+      </div>
+
+      <div class="form-input">
+        <ion-input type="text" placeholder="Buscar en Recomiendo..." (ionChange)='search()' [(ngModel)]="searchTerms">
+          <ion-icon src="assets/img/icon/busqueda.svg" class="icono"></ion-icon>
+        </ion-input>
+      </div>
+    </div>
+
+  </div>
+  <div class="container-head-information">
+    <img [src]="'https://valdusoft.com/recomiendo/company/image/'+this.avatar.name"
+      onerror="this.src='https://via.placeholder.com/123'" alt="logo" class="avatar">
+    <div class="head-title">
+      <h1>{{local.name | titlecase}}</h1>
+      <p style="display: flex;align-items: center;" (click)="modallocal()">Mas información <span
+          style="color:#FF5A31; margin-left: 7px;font-size: 1.5rem;">
+          <ion-icon name="chevron-forward"> </ion-icon>
+        </span> </p>
+    </div>
+
+    <span class="head-star">
+      <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+      <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+      <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+      <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+      <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+    </span>
+
+    <div class="menu-divider">
+      <p>
+        <ion-icon src="assets/img/icon/escoger.svg"></ion-icon>
+        Menú
+      </p>
+    </div>
+  </div>
+  <ng-container *ngIf="searchTerms.length == 0 && products.length > 5">
+    <div class="espaciado" *ngFor="let category of this.local.products">
+      <div class="conocerte">
+        <div class="conocerte-box">
+          <p class="conocerte-box-subtitulo" *ngIf="this.local.products.lenght <= 5">{{category.name}}</p>
+          <p class="conocerte-box-subtitulo" *ngIf="this.local.products.lenght > 5" style="    padding-left: 1rem;margin: 1rem;">Comidas</p>
+          <span class="conocerte-box-imagen">
+            <!--      <p style="font-size: 0.9375rem; color: #FF8800;">Ver todos</p> -->
+          </span>
+        </div>
+      </div>
+      <div class="carrousel1">
+        <ion-slides [options]="slideOpts" #slide>
+          <ion-slide *ngFor="let item of category.products" style="margin-right: -3rem !important;">
+            <div>
+              <div style="overflow: hidden; position: relative;    box-shadow: 0px 0px 6px #00000029;
+              border-radius: 20px;">
+                <div class="slide-precio">
+                  <p>{{item.price || 0}} $</p>
+                </div>
+                <div class="slide-titulo">
+                  <p>{{item.name}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0].name"
+                  style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 20px;" />
+              </div>
+              <ng-container *ngIf="checkItems(item) < 0">
+                <ion-button class="btn-food" (click)="add(item)">Agregar</ion-button>
+              </ng-container>
+              <ng-container *ngIf="checkItems(item) >= 0">
+                <ion-button class="btn-food" (click)="add(item)">Quitar</ion-button>
+              </ng-container>
+            </div>
+
+          </ion-slide>
+
+        </ion-slides>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="searchTerms.length != 0 && results.length>0 && products.length <= 5">
+    <div class="espaciado">
+      <p class="conocerte-box-subtitulo" style="padding-left: 1rem;margin: 1rem;">Comidas</p>
+      <div class="carrousel1">
+        <ion-slides [options]="slideOpts" #slide>
+          <ion-slide *ngFor="let item of results" style="margin-right: -3rem !important;">
+            <div>
+              <div style="overflow: hidden; position: relative;">
+                <div class="slide-precio">
+                  <p>{{item.products[0].price || 0}} $</p>
+                </div>
+                <div class="slide-titulo">
+                  <p>{{item.name}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.products[0].photos[0].name"
+                  style="max-width: 139px; max-height: 137px;min-height: 153px;min-width: 139px;border-radius: 20px;" />
+              </div>
+              <ng-container *ngIf="checkItems(item.products[0]) < 0">
+                <ion-button class="btn-food" (click)="add(item.products[0])">Agregar</ion-button>
+              </ng-container>
+              <ng-container *ngIf="checkItems(item.products[0]) >= 0">
+                <ion-button class="btn-food" (click)="add(item.products[0])">Quitar</ion-button>
+              </ng-container>
+            </div>
+
+          </ion-slide>
+
+        </ion-slides>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="searchTerms.length == 0 && products.length <= 5">
+    <div class="espaciado">
+      <p class="conocerte-box-subtitulo" style="    padding-left: 1rem;
+    margin: 1rem;">Comidas</p>
+      <div class="carrousel1">
+        <ion-slides [options]="slideOpts" #slide>
+          <ion-slide *ngFor="let item of products" style="margin-right: -3rem !important;">
+            <div>
+              <div style="overflow: hidden; position: relative;">
+                <div class="slide-precio">
+                  <p>{{item.products[0].price || 0}} $</p>
+                </div>
+                <div class="slide-titulo">
+                  <p>{{item.name}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.products[0].photos[0].name"
+                  style="max-width: 139px; max-height: 137px;min-height: 153px;min-width: 139px;border-radius: 20px;" />
+              </div>
+              <ng-container *ngIf="checkItems(item.products[0]) < 0">
+                <ion-button class="btn-food" (click)="add(item.products[0])">Agregar</ion-button>
+              </ng-container>
+              <ng-container *ngIf="checkItems(item.products[0]) >= 0">
+                <ion-button class="btn-food" (click)="add(item.products[0])">Quitar</ion-button>
+              </ng-container>
+            </div>
+
+          </ion-slide>
+
+        </ion-slides>
+      </div>
+    </div>
+  </ng-container>
+  <!--   <div style="margin-bottom: 1rem;">
+    <div class="conocerte">
+      <div class="conocerte-box">
+        <p class="conocerte-box-subtitulo">Perros Calientes</p>
+        <span class="conocerte-box-imagen">
+          <p style="font-size: 0.9375rem; color: #FF8800;">Ver todos</p>
+        </span>
+      </div>
+    </div>
+    <div class="carrousel1">
+      <ion-slides [options]="slideOpts" #slide>
+        <ion-slide>
+          <div>
+            <div style="overflow: hidden; position: relative;">
+              <div class="slide-precio">
+                <p>15.000 $</p>
+              </div>
+              <div class="slide-titulo">
+                <p>hamburguesa ranchera</p>
+              </div>
+              <img src="assets/img/food1.png" />
+            </div>
+            <ion-button class="btn-food">Agregar</ion-button>
+          </div>
+
+        </ion-slide>
+
+        <ion-slide>
+          <div>
+            <div style="overflow: hidden; position: relative;">
+              <div class="slide-precio">
+                <p>15.000 $</p>
+              </div>
+              <div class="slide-titulo">
+                <p>hamburguesa vegana</p>
+              </div>
+              <img src="assets/img/food1.png" />
+            </div>
+            <ion-button class="btn-food">Agregar</ion-button>
+          </div>
+
+        </ion-slide>
+
+        <ion-slide>
+          <div>
+            <div style="overflow: hidden; position: relative;">
+              <div class="slide-precio">
+                <p>15.000 $</p>
+              </div>
+              <div class="slide-titulo">
+                <p>hamburguesa carne</p>
+              </div>
+              <img src="assets/img/food1.png" />
+            </div>
+            <ion-button class="btn-food">Agregar</ion-button>
+          </div>
+
+        </ion-slide>
+
+      </ion-slides>
+    </div>
+  </div> -->
+
+</ion-content>
+<ion-footer class="ion-no-border" style="    margin: 8px 0;">
+  <div class="container-footer">
+    <div class="container-footer-body">
+      <div class="contenedor-valor">
+        <p style="margin: 0"> {{listProducts.length}} </p>
+      </div>
+      <div>
+        <ion-button class="btn-food" (click)="modal()">Ver pedido</ion-button>
+      </div>
+      <div>
+        <p style="margin-right: 1rem; color: #FF5A31;">${{calculatedTotal() || 0}}</p>
+      </div>
+    </div>
+  </div>
+</ion-footer>

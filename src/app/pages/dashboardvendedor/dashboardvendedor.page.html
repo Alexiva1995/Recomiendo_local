@@ -1,0 +1,179 @@
+<ion-header class="ion-no-border">
+  <div class="cabezera">
+    <div class="cabezera-separador">
+      <div class="cabezera-principal">
+        <img (click)="goTo('/profile')" [src]="'https://valdusoft.com/recomiendo/user/avatar/'+getUser().user.photo"
+          onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'" alt="">
+        <h1 class="cabezera-titulo">Hola, {{getUser().user.name}}</h1>
+        <!-- <span>
+            <p> <strong style="font-size: 20px;">32</strong> <br> <span style="opacity: 0.9; font-size: 0.75rem;">Premios</span></p>
+          </span>
+          <span>
+            <p> <strong style="font-size: 20px;">104</strong> <br> <span style="opacity: 0.9; font-size: 0.75rem;">Mi red</span></p>
+          </span> -->
+      </div>
+      <div class="cabezera-secundaria">
+        <div>
+          <img src="assets/img/moneda-grande.png" alt="">
+          <span> {{getUser().user.balance || 0}} </span>
+        </div>
+        <!-- <div class="contenedor-barra">
+            <p style="margin: 0; text-align: right; color: #fff;">25/25</p>
+          <ion-progress-bar value="0.2" class="barra-invertida"></ion-progress-bar>
+        </div> -->
+      </div>
+    </div>
+    <div class="cabezera-terciaria">
+      <div class="cabezera-terciaria-contenedor">
+        <div class="caja">
+          <p>{{getUser().award || 0}}</p>
+          <p>Mis premios</p>
+        </div>
+        <div class="caja">
+          <p>{{getUser().myproducts_recommended || 0}}</p>
+          <p>Productos</p>
+        </div>
+        <div class="caja">
+          <p>{{getUser().red || 0}}</p>
+          <p>Mi red</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="form-input">
+    <ion-input disabled type="text" placeholder="Buscar en Recomiendo..." (click)="openModal()">
+      <ion-icon src="assets/img/icon/busqueda.svg" class="icono"></ion-icon>
+    </ion-input>
+  </div>
+
+  <div class="pedidos">
+    <img src="assets/img/Grupo 8532x.png" style="width:44px; height: 44px; margin-right: 0.3rem;
+    margin-left: 5px;" alt="">
+    <div>
+      <h1>Pedidos</h1>
+      <div class="alinear-pedidos">
+        <p>Administra tus pedidos</p>
+        <p style="font-size: 0.9375rem; color: #FF8800;" 
+        (click)="go('/app/tabs/dashboard')">Ver todos</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification-list">
+    <ion-segment [(ngModel)]="option">
+      <ion-segment-button value="friends">
+        <ion-label>Pendientes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies">
+        <ion-label>En proceso</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="notification-list-item">
+      <ion-list *ngIf="option == 'friends'">
+        <ng-container *ngIf="option =='friends' && pedidos.length != 0">
+          <ion-item *ngFor="let item of pedidos">
+            <div style="position: relative;">
+              <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
+                <img [src]="'https://valdusoft.com/recomiendo/user/avatar/'+item.user.photo"
+                  onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'">
+                <!-- item.user.photo -->
+              </ion-thumbnail>
+            </div>
+            <ion-label>
+              <h3 style="font-size: 18px;">{{item.user.name}}</h3>
+              <p style="color: #FF5A31; font-size: 15px;">
+                ID: {{item.purchase_details[0].purchase_id}}</p>
+              <p class="btn-food" (click)="go('/app/tabs/dashboard')">Ver pedido</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ion-item *ngIf="option =='friends' && pedidos.length == 0">
+          <p>
+            Aun no posee pedidos
+          </p>
+        </ion-item>
+      </ion-list>
+      <ion-list *ngIf="option == 'enemies'">
+        <ng-container *ngIf="option =='enemies' && procesado.length != 0">
+          <ion-item *ngFor="let item of procesado">
+            <div style="position: relative;">
+              <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
+                <img [src]="'https://valdusoft.com/recomiendo/user/avatar/'+item.user.photo"
+                  onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'">
+                <!-- item.user.photo -->
+              </ion-thumbnail>
+            </div>
+            <ion-label>
+              <h3 style="font-size: 18px;">{{item.user.name}}</h3>
+              <p style="color: #FF5A31; font-size: 15px;">
+                ID: {{item.purchase_details[0].purchase_id}}</p>
+              <p class="btn-food" (click)="go('/app/tabs/dashboard')">Ver pedido</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+        <ion-item *ngIf="option =='enemies' && procesado.length == 0">
+          <p>
+            Aun no posee pedidos
+          </p>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+
+
+  <!-- 
+  <div class="carrousel1">
+    <ion-slides [options]="slideOpts" #slide>
+      <ion-slide *ngFor="let item of myProducts">
+        <div style="overflow: hidden; position: relative;">
+          <div class="slide-precio">
+            <p>{{item.price}} $</p>
+          </div>
+          <div class="slide-titulo">
+            <p>{{item.name}}</p>
+          </div>
+          <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name"
+            style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 20px;" />
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div> -->
+  <div class="recomendaciones" (click)="go('/app/tabs/order')">
+    <img src="assets/img/publica tus productos@2x.png" class="img-banner" alt="">
+  </div>
+  <div class="conocerte">
+    <h1 class="conocerte-titulo">Tus productos</h1>
+    <div class="conocerte-box">
+      <p class="conocerte-box-subtitulo">Estos son los productos que haz publicado</p>
+      <span class="conocerte-box-imagen">
+        <p style="font-size: 0.9375rem; color: #FF8800;">Ver todos</p>
+      </span>
+    </div>
+  </div>
+  <div class="carrousel2">
+    <ion-slides [options]="slideOpts" #slide>
+      <ion-slide *ngFor="let item of myProducts">
+        <div style="overflow: hidden; position: relative;">
+          <div class="slide-precio">
+            <p>
+              <img src="assets/img/moneda.png" alt="">
+              {{item.price}}
+            </p>
+          </div>
+          <div class="slide-titulo2">
+            <p>{{item.name}}</p>
+          </div>
+          <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0]?.name"
+            onerror="this.src='https://image.freepik.com/vector-gratis/dia-mundial-comida-vista-frontal-pollo-relleno_23-2148291811.jpg'"
+            style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 20px;" />
+        </div>
+      </ion-slide>
+
+    </ion-slides>
+  </div>
+</ion-content>

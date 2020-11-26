@@ -1,0 +1,102 @@
+<ion-content>
+  <ion-toolbar mode='ios'>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <!-- <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title>Premios</ion-title>
+  </ion-toolbar>
+
+  <ion-slides #slides pager="false">
+
+    <ion-slide>
+
+      <h2 class="slide-title">
+        <ion-searchbar placeholder="Buscar productos..." (ionChange)='search()' [(ngModel)]="searchTerm">
+        </ion-searchbar>
+      </h2>
+
+      <ion-segment [(ngModel)]="segment" color="primary">
+        <ion-segment-button value="friends">
+          <ion-label style="color: #000;">Por <br> canjear</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="enemies">
+          <ion-label style="color: #000;">Canjeados</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <p style="    font-size: 15px;
+        text-align: left;
+        padding: 0 1rem;">
+        En esta sección encontrarás todos los premios <br> que aun no has canjeado.
+      </p>
+      <ion-grid *ngIf="segment == 'enemies'">
+        <ion-row>
+          <ng-container *ngFor="let item of searchAwards">
+
+            <ion-col size="4" *ngIf="item.award.status == 1">
+              <div style="overflow: hidden; position: relative;">
+                <div class="slide-precio">
+                  <p style="color: white;">{{item.rating | number:'1.1-1'}}
+                    <ion-icon name="star" style="color: #FFB300;"></ion-icon>
+                  </p>
+                </div>
+
+
+
+                <div class="slide-titulo" style="    background: linear-gradient(0deg, #110600, transparent);
+                  border-radius: 20px;">
+                  <p style="color: white;">{{item.name | titlecase}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name" style="
+                  min-height: 122px;
+                  min-width: 104px;
+                  border-radius: 20px;" />
+              </div>
+            </ion-col>
+          </ng-container>
+
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="segment == 'friends'">
+        <ion-row>
+          <ng-container *ngFor="let item of searchAwards">
+            <ion-col size="4" *ngIf="item.award.status == 0" (click)="openModal(item)">
+              <div style="overflow: hidden; position: relative;">
+                <div class="slide-precio">
+                  <p style="color: white;">{{item.rating | number:'1.1-1'}} <ion-icon name="star"
+                      style="color: #FFB300;"></ion-icon>
+                  </p>
+                </div>
+
+
+
+                <div class="slide-titulo" style="    background: linear-gradient(0deg, #110600, transparent);
+                border-radius: 20px;">
+                  <p style="color: white;">{{item.name | titlecase}}</p>
+                </div>
+                <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name" style="
+                min-height: 122px;
+                min-width: 104px;
+                border-radius: 20px;" />
+              </div>
+            </ion-col>
+          </ng-container>
+
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+  </ion-slides>
+
+
+</ion-content>
+<ion-footer class="ion-no-border">
+
+
+
+</ion-footer>

@@ -1,0 +1,63 @@
+<ion-content>
+
+  <div class="contenedor-alimento">
+    <div class="slide-precio">
+      <p style="color: white;">
+        <ion-icon name="star" style="color: #FFB300;"></ion-icon> {{award.rating | number : '1.0-0'}}
+      </p>
+    </div>
+    <!-- <img src="assets/img/food1grande.png" style="width: 100%;" alt=""> -->
+    <img [src]="'https://valdusoft.com/recomiendo/product/image/'+award.photo.name"
+      style="max-width: 379px;width: 100%;max-height: 204px;min-height: 204px;min-width: 379px;" />
+  </div>
+
+
+  <div class="contenedor">
+    <h1 style="font-size: 25px;">{{award.name}}</h1>
+    <p style="margin: 0; color: #C0C0C0; font-size: 15px;  opacity: 0.8;">{{award.description}}</p>
+  </div>
+
+
+  <ion-list>
+    <ion-item>
+      <ion-thumbnail slot="start" style="margin-right: 0.5rem;
+      height: 35px;
+      width: 35px;
+      margin-bottom: 1rem;">
+        <img [src]="'https://valdusoft.com/recomiendo/company/image/'+local?.photo_company[0]?.name"
+          onerror="this.src='https://via.placeholder.com/123'"
+          style="width: 35px; height: 35px; max-width: 35px;min-width: 35px;">
+      </ion-thumbnail>
+      <ion-label>
+        <h3 style="font-size: 20px; font-weight: 400;">{{local.name}}</h3>
+        <div class="dividir-opcion">
+          <p>
+            <span class="head-star" slot="start">
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+            </span>
+          </p>
+          <p style="display: flex;align-items: center;" (click)="go()">Ver tienda <span
+              style="color:#FF5A31; margin-left: 7px;font-size: 1.5rem;">
+              <ion-icon name="chevron-forward"> </ion-icon>
+            </span> </p>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+<ion-footer class="ion-no-border">
+  <ion-button style="margin: 0 auto; height: 60px; color: #fff; 
+  --border-radius: 23px 23px 0px 0px; font-size: 23px;
+  --background:linear-gradient(90deg, #FF2424 0%, #FFBB00 100%);
+  --background-hover:none;
+  " expand="block" shape="block" class="finalUser second" mode='ios' (click)="clain()">
+    RECLAMAR
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-button>
+</ion-footer>

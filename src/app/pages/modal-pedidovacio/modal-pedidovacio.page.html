@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="naranja">
+    <ion-buttons slot="start">
+      <ion-icon name="close-outline" (click)="salir()"></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-center" mode="ios" style="font-size: 21px;">Tu pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div class="centrar-enmedio">
+    <ion-icon src="assets/img/icon/comprador.svg" class="iconogrande"></ion-icon>
+      <p style="font-size: 20px;">No tienes productos en tu pedido</p>
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-button style="margin: 0 auto; height: 60px;     
+  --background:linear-gradient(160deg, #FF2424 0%, #FFB300 100%) 0% 0% no-repeat padding-box; 
+  --border-radius: 23px; font-size: 23px;" 
+  expand="block" shape="round" class="finalUser second" mode='ios'>
+  Volver a la tienda
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,223 @@
+.form-input {
+  width: 87%;
+  margin: 0 auto;
+  // background-color: #F3F3F3;
+  height: 1.9rem;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  // margin-right: 1rem;
+  // margin-left: .3rem;
+  // box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.12);
+}
+.icono {
+  font-size: 1.4rem;
+  // margin-left: 0.7rem;
+  // margin-right: 0.5rem;
+  position: absolute;
+  right: 1rem;
+}
+
+.contenedor-barra-cabezera {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.avatar-sliding {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  box-sizing: content-box;
+  padding: 0.5rem;
+  background: white;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.12);
+}
+
+.avatar-title {
+  font-size: 13px;
+}
+
+.caja {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+// COMPONENTE PARA RE USAR
+.espaciado {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.conocerte {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  &-titulo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  &-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-subtitulo {
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+      letter-spacing: -0.8px;
+      color: #000000;
+      opacity: 1;
+      font-size: 1.25rem;
+    }
+    &-imagen {
+      display: flex;
+      align-items: center;
+      p {
+        display: inline;
+        font-size: 1.375rem;
+        color: #ff6e12;
+        margin: 0;
+      }
+      img {
+        margin-left: 0.5rem;
+        width: 30px;
+      }
+    }
+  }
+  &-box2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-subtitulo2 {
+      margin: 0;
+      margin-top: 0.8rem;
+      margin-left: 0.8rem;
+      font-size: 1.125rem;
+      color: #fff;
+      line-height: 1.35;
+    }
+    &-imagen2 {
+      background: #fff;
+      padding: 0.5rem;
+      border-radius: 50%;
+      margin-right: 0.8rem;
+    }
+  }
+  &-tarjeta {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    background-image: linear-gradient(90deg, #ffb300 0%, #ff5a31 100%);
+    padding: 0 0 1rem;
+    border-radius: 20px;
+  }
+  &-menudia {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-titulo {
+      position: absolute;
+      color: #fff;
+      width: 100%;
+      bottom: 0.2rem;
+      text-align: center;
+      border-radius: 15px;
+      background: linear-gradient(0deg, black, transparent);
+    }
+  }
+}
+
+.slide-titulo {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  bottom: 0.2rem;
+  text-align: center;
+  border-radius: 8px;
+  background: linear-gradient(0deg, #000, transparent);
+}
+ion-slide {
+  width: 40% !important;
+}
+
+.slide-precio {
+  font-size: 15px;
+  opacity: 0.8;
+  position: absolute;
+  color: #fff;
+  padding: 0.2rem;
+  padding-right: 1.5rem;
+  top: 1.2rem;
+  border-radius: 0px 15px 15px 0;
+  background-image: linear-gradient(190deg, #ffb300 0%, #ff5a31 100%);
+  p {
+    margin: 0;
+    font-size: 0.9375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    width: 20px;
+  }
+}
+
+.btn-food {
+  // width: 100%;
+  // height: 33px;
+  height: 25px;
+  width: 95px;
+  --border-radius: 5px;
+  --background: transparent linear-gradient(-90deg, #ffb300 0%, #ff2424 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.slide2 {
+  width: 25% !important;
+}
+.titulo-columna {
+  display: flex;
+  justify-content: space-around;
+  p {
+    margin: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+.dividir-opcion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tarjeta {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 15px #0029;
+  border-radius: 20px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.container-qr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    text-align: center;
+  }
+  img {
+    padding-top: 1rem;
+    height: 13rem;
+  }
+}
+
+.txt-footer {
+  display: flex;
+  flex-direction: column;
+}

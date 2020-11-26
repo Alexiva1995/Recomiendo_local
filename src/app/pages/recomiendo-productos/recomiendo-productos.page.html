@@ -1,0 +1,28 @@
+
+<ion-content style="   
+--background:linear-gradient(-90deg, #FFB300 0%, #FF5A31 100%);;
+">
+
+<ion-toolbar mode='ios'>
+  <ion-buttons slot="start" class="color">
+    <ion-back-button text="" defaultHref="/app/tabs/home" style="color: #fff;"></ion-back-button>
+  </ion-buttons>
+  <ion-title>Recomienda productos</ion-title>
+</ion-toolbar>
+
+
+  <div class="contenedor">
+    <div class="contenedor-logo">
+      <h1>¡Recomienda tu producto favorito!</h1>
+      <p>Todos hemos tenido un amigo o familiar que tiene un puesto de comida muy sabrosa y hemos querido ayudarlos a promocionar su producto, con RECOMIENDO lo vamos a poder hacer, lo mejor de todo es que vas a ganar puntos los cuales te servirán para canjearlos por premios.</p>
+    </div>
+
+    <img src="assets/img/recomendar-lugares.png" class="center-image" />
+
+    <ion-button style="margin: 0 auto; padding: 0 1rem;  height: 60px;
+  --border-radius: 23px;" class="finalUser" expand="block" shape="round" mode='ios'  (click)="goTo('/recomiendo-productos-paso1')">
+      ¡A RECOMENDAR!
+    </ion-button>
+
+  </div>  
+</ion-content>

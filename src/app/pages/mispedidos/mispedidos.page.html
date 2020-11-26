@@ -1,0 +1,171 @@
+<ion-content>
+  <ion-toolbar mode='ios'>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <!-- <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title>Mis pedidos</ion-title>
+  </ion-toolbar>
+
+  <ion-slides #slides pager="false">
+
+    <ion-slide>
+
+      <h2 class="slide-title">
+        <ion-searchbar placeholder="Buscar pedidos..."></ion-searchbar>
+      </h2>
+
+      <ion-segment color="primary" [(ngModel)]="segment">
+        <ion-segment-button value="friends">
+          <ion-label style="color: #000;">Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="enemies">
+          <ion-label style="color: #000;">Finalizados</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <p style="    font-size: 15px;
+        text-align: left;
+        padding: 0 1rem;">
+        En esta sección encontrarás todos los pedidos que has hecho en las diferentes tiendas, podrás realizar nuevos
+        pedidos, editarlos y ver el estado de los mismos.
+      </p>
+      <ion-grid *ngIf="segment == 'friends'">
+        <ion-row>
+          <ng-container *ngIf="ordersPending.length > 0">
+            <ion-col size="12 " *ngFor="let item of ordersPending">
+              <div class="contenedor-tarjeta">
+                <div>
+                  <div style="    display: flex;justify-content: center;align-items: center;">
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                    <div>
+                      <p style="font-size: 20px; color: #000; margin: 0;">{{item.company.name | titlecase}}</p>
+                      <p style="color: #FF8800; margin: 0;">Volver a la tienda</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <ion-button class="btn-food" (click)="finalizado(item)">Finalizar</ion-button>
+                </div>
+              </div>
+
+              <div class="rayas">
+                <div class="contenedor-detalles">
+                  <div>
+                    <p>Producto</p>
+                  </div>
+                  <div class="tablatitulo">
+                    <p style="margin-right: 1rem">Cantidad</p>
+                    <p>Precio</p>
+                  </div>
+                </div>
+              </div>
+              <!-- <hr style="    background: lightgray;
+              margin: 3px 2rem;"> -->
+              <ng-container *ngFor="let product of item.purchase_details">
+                <div class="contenedor-productos">
+                  <div class="contenedor-subproductos">
+                    <img src="assets/img/food1.png" style="width: 60px;    border-radius: 10px;" />
+                    <p style="margin-left: 10px; color: #000;">{{product.product.name | titlecase}}</p>
+                  </div>
+                  <!-- <div style="color: #FF5A31; margin-right: 3.25rem;"> {{product.quantity}} </div> -->
+                  <div class="preciostabla">
+                    <span>{{product.quantity}} </span>
+                    <span>  {{product.quantity * product.product.price}}$</span>
+                  </div>
+              </div>
+                <!-- <hr style="    background: lightgray;
+               margin-top: 1rem;"> -->
+               <div class="rayas2"></div>
+              </ng-container>
+
+
+
+            </ion-col>
+          </ng-container>
+          <ng-container *ngIf="ordersPending.length === 0">
+            <ion-col size="12">
+              <ion-title>Aún no posee pedidos pendientes.</ion-title>
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="segment == 'enemies'">
+        <ion-row>
+          <ng-container *ngIf="ordersReady.length > 0">
+            <ion-col size="12 " *ngFor="let item of ordersReady">
+              <div class="contenedor-tarjeta">
+                <div>
+                  <div style="    display: flex;justify-content: center;align-items: center;">
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                    <div>
+                      <p *ngIf="item.company"   style="font-size: 20px; color: #000; margin: 0;">
+                        {{item.company.name | titlecase}}</p>
+                      <p style="color: #FF8800; margin: 0;">Volver a la tienda</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="position: relative;">
+                  <ion-icon name="chevron-down-outline" class="arrow-food"></ion-icon>
+                </div>
+              </div>
+
+              <div class="rayas">
+                <div class="contenedor-detalles">
+                  <div>
+                    <p>Producto</p>
+                  </div>
+                  <div style="display: flex;">
+                    <p style="margin-right: 1rem">Cantidad</p>
+                    <p>Precio</p>
+                  </div>
+                </div>
+              </div>
+              <!-- <hr style="    background: lightgray;
+              margin: 3px 2rem;"> -->
+              <ng-container *ngFor="let product of item.purchase_details">
+                <div class="contenedor-productos">
+                  <div class="contenedor-subproductos">
+                    <img src="assets/img/food1.png" style="width: 60px;    border-radius: 10px;" />
+                    <p style="margin-left: 10px; color: #000;">{{product.product.name | titlecase}}</p>
+                  </div>
+                  <!-- <div style="color: #FF5A31; margin-right: 3.25rem;"> {{product.quantity}} </div> -->
+                  <div class="preciostabla">
+                    <span>{{product.quantity}} </span>
+                    <span>  {{product.quantity * product.product.price}}$</span>
+                  </div>
+                 </div>
+                <!-- <hr style="    background: lightgray;
+               margin-top: 1rem;"> -->
+               <div class="rayas2"></div>
+
+              </ng-container>
+
+
+
+            </ion-col>
+          </ng-container>
+          <ng-container *ngIf="ordersReady.length === 0">
+            <ion-col size="12">
+              Aún no posee pedidos finalizados.
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+  </ion-slides>
+
+
+</ion-content>
+<ion-footer class="ion-no-border">
+
+
+
+</ion-footer>

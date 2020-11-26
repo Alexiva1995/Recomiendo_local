@@ -1,0 +1,88 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="new-background-color">
+    <div class="ajustar">
+      <div>
+        <ion-buttons slot="start" class="color" >
+          <ion-back-button mode="ios" text="" defaultHref="/app/tabs/home" style="color: #fff;"></ion-back-button>
+        </ion-buttons>
+      </div>
+      <div>
+        <ion-title>Editar perfil</ion-title>
+      </div>
+      <div style=" font-size: 1.7rem;margin-right: 1rem;">
+        <ion-buttons slot="start" class="color" (click)="changeData()">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-buttons>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="new-background-color2">
+  <div class="contenedor">
+    <div class="contenedor-logo">
+      <ion-avatar (click)=" captureImage(1)">
+        <img [src]="imgSelected" 
+          onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'">
+        <ion-fab-button size="small">
+          <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+      </ion-avatar>
+      <p>Cambia tu foto de perfil</p>
+    </div>
+    <div class="contenedor-form">
+      <form [formGroup]="form">
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked" style="font-size: 21px; font-weight: 800;">Usuario<ion-text color="dark">*
+              </ion-text>
+            </ion-label>
+            <ion-input formControlName="name" type="text" mode="ios" placeholder="Ingresa un nombre de usuario *">
+            </ion-input>
+
+            <!-- <ion-text color="danger" [hidden]='!form.controls.name.errors?.required'>
+            <p style="margin: 0; font-size: 14px; color: #FFBB00;" class="ion-padding-start">
+               el campo no puede estar vacio
+            </p>
+          </ion-text> -->
+
+          </ion-item>
+
+          <ion-item>
+            <ion-label style="font-size: 21px; font-weight: 800;" position="stacked">Contraseña <ion-text color="dark">*
+              </ion-text>
+            </ion-label>
+            <ion-input formControlName="password" type="password" mode="ios" placeholder="Ingresa una contraseña *">
+            </ion-input>
+
+            <ion-text color="danger" [hidden]='!form.controls.password.errors?.minlength'>
+              <p style="margin: 0; font-size: 14px; color: #FFBB00;" class="ion-padding-start">
+                Contraseña debe contener mínimo 6 caracteres
+              </p>
+            </ion-text>
+
+          </ion-item>
+
+
+
+          <ion-item>
+            <ion-label style="font-size: 21px; font-weight: 800;" position="stacked">Repetir contraseña</ion-label>
+            <ion-input formControlName="repassword" type="password" mode="ios" placeholder="Repite la contraseña *">
+            </ion-input>
+
+            <ion-text color="danger" [hidden]='!form.controls.repassword.errors?.confirmedValidator'>
+              <p style="margin: 0; font-size: 14px; color: #FFBB00;" class="ion-padding-start">
+                Contraseña no coinciden
+              </p>
+            </ion-text>
+          </ion-item>
+
+
+
+
+
+        </ion-list>
+      </form>
+    </div>
+  </div>
+</ion-content>

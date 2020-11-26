@@ -1,0 +1,460 @@
+<ion-content>
+  <ion-toolbar mode='ios'>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <!-- <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title>Administrar pedidos</ion-title>
+  </ion-toolbar>
+
+  <div style="background: white;border-top-right-radius: 13px;border-top-left-radius: 7px;">
+    <ion-segment [(ngModel)]="segment" scrollable="true" >
+      <ion-segment-button value="friends">
+        <ion-label style="color: #000;">Pendientes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies">
+        <ion-label style="color: #000;">Aceptado</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies2">
+        <ion-label style="color: #000;">En proceso</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies3">
+        <ion-label style="color: #000;">Realizado</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies4">
+        <ion-label style="color: #000;">finalizado</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="enemies5">
+        <ion-label style="color: #000;">Cancelado</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-slides #slides pager="false">
+    <ion-slide>
+      <ion-grid *ngIf="segment === 'friends'">
+        <ion-row>
+          <ng-container *ngIf="ordersPending.length > 0">
+            <ng-container *ngFor="let item of ordersPending">
+            <ion-col size="12" *ngIf="item.status == 0">
+              <div class="contenedor-tarjeta">
+                <div style=" display: flex; margin-right: auto;">
+                  <div>
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                  </div>
+                  <div style="margin: 10px 10px;">
+                    <p style="font-size: 20px; color: #000; margin: 0;">
+                      {{item.user.name | titlecase}}</p>
+                    <p style="color: #FF5A31; margin: 0; font-weight: bold; float: left;">
+                      ID:{{item.purchase_details[0].purchase_id }}</p>
+                  </div>
+                </div>
+                <div class="btn-food-container">
+                  <p class="btn-food">{{item.total}}$</p>
+                </div>
+              </div>
+
+              <!-- TITULO DE LOS ITEMS -->
+              <div class="contenedor-detalles">
+                <div>
+                  <p>Producto</p>
+                </div>
+                <div class="tablatitulo">
+                  <p style="margin-right: 1rem">Cantidad</p>
+                  <p>Precio</p>
+                </div>
+              </div>
+
+              <!-- PRODUCTOS -->
+            <ng-container *ngFor="let product of item.purchase_details">
+              <div class="contenedor-productos">
+                <div class="contenedor-subproductos"> 
+                  <img src="assets/img/food1.png" style="width: 57px; height: 57px;"/>
+                  <p style="margin: 0; color: #000;padding-left: 4px;">{{product.product.name}}</p>
+                </div>
+                <div class="precio-tabla">
+                  <div style="color: #FF5A31;"> {{product.quantity}} </div>
+                  <div style="color:#FF5A31">{{product.product.price}}$</div>
+                </div>
+              </div>
+            </ng-container>
+
+              <!-- TOTAL -->
+              <p class="total-pago"><span style="margin-left:1rem;    
+               font-size: 15px;">TOTAL</span> <span style="font-weight: bold;">{{item.total}}$</span></p>
+
+              <!-- BOTONES -->
+              <div class="alinear-btnpago">
+                <div>
+                  <ion-button (click)="decision(item.purchase_details[0].purchase_id , 5)" style=" --background: #EAEAEA;color: black; margin: 0%;
+                  width: 150px;">Rechazar</ion-button>
+                </div>
+                <div>
+                  <ion-button (click)="decision(item.purchase_details[0].purchase_id , 1)"
+                    style=" --background: #FF7100; margin: 0; width: 150px;">
+                    Aceptar</ion-button>
+                </div>
+              </div>
+            </ion-col>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="ordersPending.length === 0">
+          <ion-col size="12">
+            <ion-title>Aún no posee pedidos pendientes.</ion-title>
+          </ion-col>
+        </ng-container>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="segment === 'enemies'">
+        <ion-row>
+          <ng-container *ngIf="ordersPending.length > 0">
+            <ng-container *ngFor="let item of ordersPending">
+            <ion-col size="12" *ngIf="item.status == 1">
+              <div class="contenedor-tarjeta">
+                <div style=" display: flex; margin-right: auto;">
+                  <div>
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                  </div>
+                  <div style="margin: 10px 10px;">
+                    <p style="font-size: 20px; color: #000; margin: 0;">
+                      {{item.user.name | titlecase}}</p>
+                    <p style="color: #FF5A31; margin: 0; font-weight: bold; float: left;">
+                      ID:{{item.purchase_details[0].purchase_id }}</p>
+                  </div>
+                </div>
+                <div class="btn-food-container">
+                  <p class="btn-food">{{item.total}}$</p>
+                </div>
+              </div>
+
+              <!-- TITULO DE LOS ITEMS -->
+              <div class="contenedor-detalles">
+                <div>
+                  <p>Producto</p>
+                </div>
+                <div class="tablatitulo">
+                  <p style="margin-right: 1rem">Cantidad</p>
+                  <p>Precio</p>
+                </div>
+              </div>
+
+              <!-- PRODUCTOS -->
+            <ng-container *ngFor="let product of item.purchase_details">
+              <div class="contenedor-productos">
+                <div class="contenedor-subproductos"> 
+                  <img src="assets/img/food1.png" style="width: 57px; height: 57px;"/>
+                  <p style="margin: 0; color: #000;padding-left: 4px;">{{product.product.name}}</p>
+                </div>
+                <div class="precio-tabla">
+                  <div style="color: #FF5A31;"> {{product.quantity}} </div>
+                  <div style="color:#FF5A31">{{product.product.price}}$</div>
+                </div>
+              </div>
+            </ng-container>
+
+              <!-- TOTAL -->
+              <p class="total-pago"><span style="margin-left:1rem;    
+               font-size: 15px;">TOTAL</span> <span style="font-weight: bold;">{{item.total}}$</span></p>
+
+              <!-- BOTONES -->
+              <div class="alinear-btnpago">
+                <div>
+                  <ion-button (click)="decision(item.purchase_details[0].purchase_id , 5)" style=" --background: #EAEAEA;color: black; margin: 0%;
+                  width: 150px;">Rechazar</ion-button>
+                </div>
+                <div>
+                  <ion-button  (click)="decision(item.purchase_details[0].purchase_id , 2)" style=" --background: #FF7100; margin: 0; width: 150px;">
+                    Aceptar</ion-button>
+                </div>
+              </div>
+            </ion-col>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="ordersPending.length === 0">
+          <ion-col size="12">
+            <ion-title>Aún no posee pedidos pendientes.</ion-title>
+          </ion-col>
+        </ng-container>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="segment === 'enemies2'">
+        <ion-row>
+          <ng-container *ngIf="ordersPending.length > 0">
+            <ng-container *ngFor="let item of ordersPending">
+            <ion-col size="12" *ngIf="item.status == 2">
+              <div class="contenedor-tarjeta">
+                <div style=" display: flex; margin-right: auto;">
+                  <div>
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                  </div>
+                  <div style="margin: 10px 10px;">
+                    <p style="font-size: 20px; color: #000; margin: 0;">
+                      {{item.user.name | titlecase}}</p>
+                    <p style="color: #FF5A31; margin: 0; font-weight: bold; float: left;">
+                      ID:{{item.purchase_details[0].purchase_id }}</p>
+                  </div>
+                </div>
+                <div class="btn-food-container">
+                  <p class="btn-food">{{item.total}}$</p>
+                </div>
+              </div>
+
+              <!-- TITULO DE LOS ITEMS -->
+              <div class="contenedor-detalles">
+                <div>
+                  <p>Producto</p>
+                </div>
+                <div class="tablatitulo">
+                  <p style="margin-right: 1rem">Cantidad</p>
+                  <p>Precio</p>
+                </div>
+              </div>
+
+              <!-- PRODUCTOS -->
+            <ng-container *ngFor="let product of item.purchase_details">
+              <div class="contenedor-productos">
+                <div class="contenedor-subproductos"> 
+                  <img src="assets/img/food1.png" style="width: 57px; height: 57px;"/>
+                  <p style="margin: 0; color: #000;padding-left: 4px;">{{product.product.name}}</p>
+                </div>
+                <div class="precio-tabla">
+                  <div style="color: #FF5A31;"> {{product.quantity}} </div>
+                  <div style="color:#FF5A31">{{product.product.price}}$</div>
+                </div>
+              </div>
+            </ng-container>
+
+              <!-- TOTAL -->
+              <p class="total-pago"><span style="margin-left:1rem;    
+               font-size: 15px;">TOTAL</span> <span style="font-weight: bold;">{{item.total}}$</span></p>
+
+              <!-- BOTONES -->
+              <div class="alinear-btnpago">
+                <div>
+                  <ion-button (click)="decision(item.purchase_details[0].purchase_id , 5)" style=" --background: #EAEAEA;color: black; margin: 0%;
+                  width: 150px;">Rechazar</ion-button>
+                </div>
+                <div>
+                  <ion-button  (click)="decision(item.purchase_details[0].purchase_id , 3)" style=" --background: #FF7100; margin: 0; width: 150px;">
+                    Aceptar</ion-button>
+                </div>
+              </div>
+            </ion-col>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="ordersPending.length === 0">
+          <ion-col size="12">
+            <ion-title>Aún no posee pedidos pendientes.</ion-title>
+          </ion-col>
+        </ng-container>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="segment === 'enemies3'">
+        <ion-row>
+          <ng-container *ngIf="ordersPending.length > 0">
+            <ng-container *ngFor="let item of ordersPending">
+          <ion-col size="12"  *ngIf="item.status == 3">
+            <div class="contenedor-tarjeta2">
+              <div style=" display: flex; margin-right: auto;">
+                <div>
+                  <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                </div>
+                <div style="margin: 10px 10px;">
+                  <p style="font-size: 20px; color: #000; margin: 0;">{{item.user.name | titlecase}}</p>
+                  <p style="color: #FF5A31; margin: 0;float: left;">
+                    ID:{{item.purchase_details[0].purchase_id }}</p>
+                </div>
+              </div>
+              <div class="btn-food-container">
+                <p class="btn-food">{{item.total}}$</p>
+              </div>
+
+              <!-- BOTONES -->
+              <div>
+                <div class="alinear-btnpago">
+                  <div>
+                    <ion-button style=" --background:white; color: #FF7100;font-size: 13px;">Ingresar codigo
+                    </ion-button>
+                  </div>
+                  <div>
+                    <ion-button style=" --background: #FF7100; font-size: 13px;" 
+                    (click)="qrScan()">Escanear QR</ion-button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- INPUT -->
+              <div style="margin-top: 1rem;margin-bottom: 1rem;">
+                <ion-item lines="none" class="qr">
+                  <div>
+                    <ion-label position="floating">Ingresa el código</ion-label>
+                    <ion-input [(ngModel)]="idRefered"></ion-input>
+                  </div>
+                  <ion-button slot="end" fill="clear" (click)="Paste()">
+                    Pegar
+                  </ion-button>
+                </ion-item>
+              </div>
+
+              <!-- boton finalizar -->
+              <div>
+                <div class="alinear-btnpago">
+                  <div>
+                    <ion-button [disabled]="!idRefered" 
+                    (click)="decision(item.purchase_details[0].purchase_id , 4)"
+                    >Finalizar pedido
+                  </ion-button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </ion-col>
+        </ng-container>
+      </ng-container>
+
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="segment === 'enemies4'">
+        <ion-row>
+        <ng-container *ngIf="ordersPending.length > 0">
+            <ng-container *ngFor="let item of ordersPending">
+            <ion-col size="12" *ngIf="item.status == 4">
+              <div class="contenedor-tarjeta">
+                <div style=" display: flex; margin-right: auto;">
+                  <div>
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                  </div>
+                  <div style="margin: 10px 10px;">
+                    <p style="font-size: 20px; color: #000; margin: 0;">
+                      {{item.user.name | titlecase}}</p>
+                    <p style="color: #FF5A31; margin: 0; font-weight: bold; float: left;">
+                      ID:{{item.purchase_details[0].purchase_id }}</p>
+                  </div>
+                </div>
+                <div class="btn-food-container">
+                  <p class="btn-food">{{item.total}}$</p>
+                </div>
+              </div>
+
+              <!-- TITULO DE LOS ITEMS -->
+              <div class="contenedor-detalles">
+                <div>
+                  <p>Producto</p>
+                </div>
+                <div class="tablatitulo">
+                  <p style="margin-right: 1rem">Cantidad</p>
+                  <p>Precio</p>
+                </div>
+              </div>
+
+              <!-- PRODUCTOS -->
+            <ng-container *ngFor="let product of item.purchase_details">
+              <div class="contenedor-productos">
+                <div class="contenedor-subproductos"> 
+                  <img src="assets/img/food1.png" style="width: 57px; height: 57px;"/>
+                  <p style="margin: 0; color: #000;padding-left: 4px;">{{product.product.name}}</p>
+                </div>
+                <div class="precio-tabla">
+                  <div style="color: #FF5A31;"> {{product.quantity}} </div>
+                  <div style="color:#FF5A31">{{product.product.price}}$</div>
+                </div>
+              </div>
+            </ng-container>
+
+              <!-- TOTAL -->
+              <p class="total-pago"><span style="margin-left:1rem;    
+               font-size: 15px;">TOTAL</span> <span style="font-weight: bold;">{{item.total}}$</span></p>
+
+              <!-- BOTONES -->
+
+            </ion-col>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="ordersPending.length === 0">
+          <ion-col size="12">
+            <ion-title>Aún no posee pedidos pendientes.</ion-title>
+          </ion-col>
+        </ng-container>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf="segment === 'enemies5'">
+        <ion-row>
+          <ng-container *ngIf="ordersPending.length > 0">
+            <ng-container *ngFor="let item of ordersPending">
+            <ion-col size="12" *ngIf="item.status == 5">
+              <div class="contenedor-tarjeta">
+                <div style=" display: flex; margin-right: auto;">
+                  <div>
+                    <img src="assets/img/logo-1.png" alt="" style="margin: 10px 10px;">
+                  </div>
+                  <div style="margin: 10px 10px;">
+                    <p style="font-size: 20px; color: #000; margin: 0;">
+                      {{item.user.name | titlecase}}</p>
+                    <p style="color: #FF5A31; margin: 0; font-weight: bold; float: left;">
+                      ID:{{item.purchase_details[0].purchase_id }}</p>
+                  </div>
+                </div>
+                <div class="btn-food-container">
+                  <p class="btn-food">{{item.total}}$</p>
+                </div>
+              </div>
+
+              <!-- TITULO DE LOS ITEMS -->
+              <div class="contenedor-detalles">
+                <div>
+                  <p>Producto</p>
+                </div>
+                <div class="tablatitulo">
+                  <p style="margin-right: 1rem">Cantidad</p>
+                  <p>Precio</p>
+                </div>
+              </div>
+
+              <!-- PRODUCTOS -->
+            <ng-container *ngFor="let product of item.purchase_details">
+              <div class="contenedor-productos">
+                <div class="contenedor-subproductos"> 
+                  <img src="assets/img/food1.png" style="width: 57px; height: 57px;"/>
+                  <p style="margin: 0; color: #000;padding-left: 4px;">{{product.product.name}}</p>
+                </div>
+                <div class="precio-tabla">
+                  <div style="color: #FF5A31;"> {{product.quantity}} </div>
+                  <div style="color:#FF5A31">{{product.product.price}}$</div>
+                </div>
+              </div>
+            </ng-container>
+
+              <!-- TOTAL -->
+              <p class="total-pago"><span style="margin-left:1rem;    
+               font-size: 15px;">TOTAL</span> <span style="font-weight: bold;">{{item.total}}$</span></p>
+
+              <!-- BOTONES -->
+
+            </ion-col>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="ordersPending.length === 0">
+          <ion-col size="12">
+            <ion-title>Aún no posee pedidos pendientes.</ion-title>
+          </ion-col>
+        </ng-container>
+        </ion-row>
+      </ion-grid>
+
+    </ion-slide>
+
+  </ion-slides>
+
+
+</ion-content>

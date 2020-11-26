@@ -1,0 +1,99 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="naranja">
+    <!-- <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons> -->
+    <ion-title class="ion-text-center" mode="ios" style="font-size: 21px;">Pedido exitoso</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="titulo-columna">
+    <p style="    position: relative;
+    right: 1.5rem;
+">Producto</p>
+    <p>Cantidad</p>
+    <p>Precio</p>
+  </div>
+
+  <ion-list style="padding: 0;">
+    <ion-item lines="full" *ngFor="let item of products">
+      <ion-thumbnail slot="start" style="margin-right: 0.5rem;
+      height:47px;
+      width: 57px;
+      margin-bottom: 1rem;">
+        <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0].name"
+          style="width: 57px; height: 57px;border-radius: 5px;" />
+      </ion-thumbnail>
+      <ion-label>
+        <div class="columna-dividir">
+          <pre style="width: 66px;">{{item.name | titlecase}}</pre>
+          <p style="right: 2rem;
+          position: relative;">
+            {{item.quantity}}
+          </p>
+          <p style="position: relative;
+          right: 2rem;">
+            {{item.price * item.quantity}}$
+          </p>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item lines="full" (click)="modallocal()">
+      <ion-thumbnail slot="start" style="margin-right: 0.5rem;
+      height: 35px;
+      width: 35px;
+      margin-bottom: 1rem;">
+        <img [src]="'https://valdusoft.com/recomiendo/company/image/'+this.local.photo_company[0].name" alt="logo"
+          class="avatar" style="    margin-right: 11.3rem;
+          width: 48px;
+          height: 48px;
+          min-width: 48px;
+          min-height: 48px;">
+      </ion-thumbnail>
+      <ion-label style="    margin-left: 1rem;">
+        <h3 style="font-size: 20px; font-weight: 400;">{{local.name | titlecase}}</h3>
+        <div class="dividir-opcion">
+          <p>
+            <span class="head-star" slot="start">
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+            </span>
+          </p>
+          <p style="color: #C0C0C0; font-size: 15px;">Mas información <span style="color: #FF5A31;"> > </span></p>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="tarjeta">
+    <div class="container-qr">
+      <qrcode #qrElement id="canvas" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+      <p class="id">Muestra éste código QR <br> o tu código al vendedor</p>
+    </div>
+    <ion-footer class="ion-no-border">
+      <ion-button style="margin: 0 auto; height: 60px;     
+      --background:#F3F3F3; 
+      color: #C0C0C0;
+      --border-radius: 23px; font-size: 23px;" expand="block" shape="round" class="finalUser second" mode='ios'>
+        <div class="txt-footer">
+          Tu código
+          <span style="color:#000">REC-PED-{{lastOrder.id}}</span>
+        </div>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </ion-button>
+    </ion-footer>
+  </div>
+
+  <div style="display:flex; justify-content: center;">
+    <ion-button style="--background: transparent linear-gradient(-90deg, #ffb300 0%, #ff2424 100%) 0% 0% no-repeat padding-box; margin-top: 1rem;" (click)="goBack()">
+      Continuar
+    </ion-button>
+  </div>
+
+</ion-content>

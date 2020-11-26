@@ -1,0 +1,45 @@
+<ion-content class="fondo" >
+  <div class="contenedor">
+    <ion-buttons slot="start" class="color">
+      <ion-back-button defaultHref="/" style="color: #fff;"></ion-back-button>
+    </ion-buttons>
+    <div class="contenedor-lateral">
+      <div class="caja-precio">
+        <div class="slide-precio">
+          <p>
+            <img src="assets/img/moneda.png" alt="">
+            {{getUser().balance}}
+          </p>
+        </div>
+      </div>
+      <div class="imagen-moneda">
+        <img src="assets/img/monedainicial4.png" class="center-image" />
+      </div>
+      <div class="caja-pasos">
+        <span class="contenedor-caja-pasos">
+          <ion-icon style="font-size: 20px;" name="help-circle"></ion-icon>
+          4/4
+        </span>
+      </div>
+    </div>
+    <div class="contenedor-modal">
+      <div #mapElement class="map"></div>
+      <form class="contenedor-footer" [formGroup]="formGroup">
+        <div class="caja-texto">
+          <ion-item>
+            <ion-input placeholder="Ingresa la dirección del local" type="text" formControlName="address"></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-button style="height: 60px; width:80%; --border-radius: 23px;" class="finalUser" expand="block"
+        [disabled]="formGroup.status == 'INVALID'"
+          shape="round" mode='ios' (click)="sendRecommend()">
+          FINALIZAR
+        </ion-button>
+      </form>
+
+    </div>
+
+
+  </div>
+</ion-content>

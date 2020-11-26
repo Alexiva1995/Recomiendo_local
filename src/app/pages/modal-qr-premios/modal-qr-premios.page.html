@@ -1,0 +1,40 @@
+<ion-content>
+
+  <div class="contenedor-alimento">
+    <div class="slide-precio">
+      <p style="color: white;">
+        <ion-icon name="star" style="color: #FFB300;"></ion-icon> {{award.rating | number : '1.0-0'}}
+      </p>
+    </div>
+    <!-- <img src="assets/img/food1grande.png" style="width: 100%;" alt=""> -->
+    <img [src]="'https://valdusoft.com/recomiendo/product/image/'+award.photo.name"
+      style="max-width: 379px;width: 100%;max-height: 204px;min-height: 204px;min-width: 379px;" />
+  </div>
+
+
+  <div class="contenedor">
+    <h1 style="font-size: 25px;">{{award.name}}</h1>
+    <p style="margin: 0; color: #C0C0C0; font-size: 15px;  opacity: 0.8;">{{award.description}}</p>
+  </div>
+
+
+  <div class="qr-container ion-text-center">
+    <p> Muestra éste código QR <br> o tu código al vendedor </p>
+    <div>
+      <qrcode #qrElement id="canvas" [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    </div>
+  </div>
+</ion-content>
+
+
+<ion-footer class="ion-no-border">
+  <ion-button style="margin: 0 auto; height: 60px; color: #fff; 
+  --border-radius: 23px 23px 0px 0px; font-size: 23px;
+  --background:linear-gradient(90deg, #FF2424 0%, #FFBB00 100%);
+  --background-hover:none;
+  " expand="block" shape="block" class="finalUser second" mode='ios' (click)="goback()">
+    Tu código: <br> {{myAngularxQrCode}} <br>
+
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+  </ion-button>
+</ion-footer>

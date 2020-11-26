@@ -1,0 +1,98 @@
+<div class="fondo">
+  <ion-toolbar mode='ios'>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Recomiendo</ion-title>
+    <div class="contenedor-barra-cabezera">
+      <ion-icon (click)="salir()" style="color: #FF5A31; font-size: 24px;margin-left:.5rem" name="arrow-back-outline">
+      </ion-icon>
+      <div class="form-input">
+
+
+        <ion-input (click)="modalbuscar()" type="text" placeholder="Buscar producto...">
+          <ion-icon src="assets/img/icon/busqueda.svg" class="icono"></ion-icon>
+        </ion-input>
+
+      </div>
+    </div>
+
+  </ion-toolbar>
+
+  <ion-content>
+
+    <ion-slides [options]="slideOpts" #slide2>
+      <ion-slide *ngFor="let item of product">
+        <div>
+          <div class="caja">
+            <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name"
+              style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 50%;" />
+            <p class="avatar-title">{{item.name | titlecase}}</p>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+
+    <div class="espaciado">
+      <div class="conocerte">
+        <div class="conocerte-box">
+          <p class="conocerte-box-subtitulo">Hamburguesas populares</p>
+          <span class="conocerte-box-imagen">
+            <!-- <p style="font-size: 0.9375rem; color: #FF8800;">Ver todos</p> -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="carrousel1">
+      <ion-slides [options]="slideOpts2" #slide>
+        <ion-slide *ngFor="let item of products">
+          <div style="overflow: hidden; position: relative;">
+            <div class="slide-precio">
+              <p>{{item.price}} $</p>
+            </div>
+            <div class="slide-titulo">
+              <p>{{item.name}}</p>
+            </div>
+            <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name"
+              style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 20px;" />
+          </div>
+        </ion-slide>
+
+
+      </ion-slides>
+    </div>
+
+    <ion-list style="margin-bottom: 3rem;">
+      <ion-list-header style="font-size: 1.25rem;">Recomendados para tí</ion-list-header>
+      <ion-item *ngFor="let item of product | slice:0:3">
+        <ion-thumbnail slot="start" style="margin-right: 0.5rem;">
+          <img style="    border-radius: 10px;"
+            [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name" />
+        </ion-thumbnail>
+        <ion-label>
+          <h3 style="font-size: 16px;">{{item.name}}</h3>
+          <p>
+            <span class="head-star">
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+              <ion-icon src="assets/img/icon/estrella.svg" class="icono-start"></ion-icon>
+            </span>
+          </p>
+          <ion-button class="btn-food" slot="end" size="small">Agregar</ion-button>
+          <p style="color: #FF5A31; font-size: 15px;"> {{item.price}}$ </p>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+
+  </ion-content>
+</div>

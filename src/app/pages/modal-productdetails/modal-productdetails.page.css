@@ -1,0 +1,57 @@
+.contenedor {
+  margin-left: 1rem;
+}
+
+.dividir-opcion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personalizar-textarea {
+  --background: #F3F3F3;
+  color: #C0C0C0;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.slide-precio {
+  position: absolute;
+  color: #fff;
+  padding: 0.2rem;
+  padding-right: 0.6rem;
+  top: 2.2rem;
+  right: 0rem;
+  border-radius: 15px 0px 0px 15px;
+  background-image: linear-gradient(190deg, #FFB300 0%, #FF5A31 100%);
+}
+
+.slide-precio p {
+  margin: 0;
+  font-size: 0.9375rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-precio img {
+  width: 20px;
+}
+
+.btn-food {
+  --border-radius: 5px;
+  --background: transparent linear-gradient(-90deg, #FFB300 0%, #FF2424 100%) 0% 0% no-repeat padding-box;
+}
+
+.container-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.personalizar-btn {
+  --padding-start: 1rem;
+  --padding-bottom: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 1rem;
+}

@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="cabezera" mode='ios'>
+    <ion-buttons slot="start" (click)="salir()">
+      <ion-back-button text="" defaultHref="/" style="color: #fff;"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+        <ion-button>
+          <img src="assets/img/moneda.png">
+          <span> {{user.balance || 0}}</span>
+        </ion-button>
+    </ion-buttons>
+
+    <ion-title>Premios disponibles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="height: 120%;">
+
+  <div style="text-align: center;">
+    <h1 style="font-size: 23px;    margin: 2rem 1.5rem;"> ¡Utiliza tus <img src="assets/img/moneda.png" alt=""
+        style="width: 20px;">
+      y canjéalos por premios!</h1>
+  </div>
+
+  <div style="text-align: center;    margin: .5rem;">
+    <p style="color: #5a5a5a; padding: 0 1rem;">Aquí encontrarás los diferentes premios que te quieras ganar, utiliza
+      tus <b>Recos</b> y disfruta de ellos.</p>
+  </div>
+
+
+
+
+  <ion-grid style="    margin: .5rem;">
+    <ion-row>
+      <ion-col size="4" *ngFor="let item of awards">
+        <div (click)="openModal(item)">
+          <div class="slide-precio">
+            <p>
+              <img src="assets/img/moneda.png" alt="">
+              {{item.price}}$
+            </p>
+          </div>
+          <div class="slide-titulo2">
+            <p>{{item.name}}</p>
+          </div>
+          <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name" style="
+          min-height: 122px;
+          min-width: 104px;
+          border-radius: 20px;" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

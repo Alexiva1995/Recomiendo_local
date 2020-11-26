@@ -1,0 +1,125 @@
+<ion-content class="new-background-color">
+  <ion-toolbar mode='ios' style="--background: transparent;
+  color: white;">
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back" mode='ios'></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <!-- <ion-button>
+        <ion-button color='primary' (click)="startApp()">SALTAR</ion-button>
+      </ion-button> -->
+    </ion-buttons>
+
+    <ion-title>Mis productos</ion-title>
+  </ion-toolbar>
+  <div class="contenedor">
+    <div class="contenedor-menu">
+      <div class="menu">
+        <ion-icon name="documents"></ion-icon>
+        <p>Menu</p>
+      </div>
+    </div>
+
+    <p class="titulo-carrousel">Comidas</p>
+    <div class="carrousel1">
+      <ion-slides [options]="slideOpts" #slide>
+        <ion-slide style="display: flex; flex-direction: column;" *ngFor="let item of myProducts">
+          <div style="overflow: hidden; position: relative;">
+            <div class="slide-precio">
+              <p> {{item.price}} $</p>
+            </div>
+            <div class="slide-titulo">
+              <p> {{item.name}} </p>
+            </div>
+            <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0]?.name"
+              onerror="this.src='https://image.freepik.com/vector-gratis/dia-mundial-comida-vista-frontal-pollo-relleno_23-2148291811.jpg'"
+              style=" max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius:
+              20px;" />
+          </div>
+          <div class="btn-divider">
+            <ion-button class="trash">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+            <ion-button class="pencil" (click)="edit(item)">
+              <ion-icon slot="icon-only" name="pencil"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-slide>
+
+      </ion-slides>
+    </div>
+
+
+    <!-- BORRAR EJEMPLO DESMOTRATIVO -->
+    <!--  <p class="titulo-carrousel">Perros Calientes</p>
+    <div class="carrousel1">
+      <ion-slides [options]="slideOpts" #slide>
+        <ion-slide style="display: flex; flex-direction: column;">
+          <div style="overflow: hidden; position: relative;">
+            <div class="slide-precio">
+              <p> 600 $</p>
+            </div>
+            <div class="slide-titulo">
+              <p> empanada </p>
+            </div>
+            <img src="assets/img/food1.png" />
+          </div>
+          <div class="btn-divider">
+            <ion-button class="trash">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+            <ion-button class="pencil">
+              <ion-icon slot="icon-only" name="pencil"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-slide>
+
+        <ion-slide style="display: flex; flex-direction: column;">
+          <div style="overflow: hidden; position: relative;">
+            <div class="slide-precio">
+              <p> 600 $</p>
+            </div>
+            <div class="slide-titulo">
+              <p> empanada </p>
+            </div>
+            <img src="assets/img/food1.png" />
+          </div>
+          <div class="btn-divider">
+            <ion-button class="trash">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+            <ion-button class="pencil">
+              <ion-icon slot="icon-only" name="pencil"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-slide>
+
+        <ion-slide style="display: flex; flex-direction: column;">
+          <div style="overflow: hidden; position: relative;">
+            <div class="slide-precio">
+              <p> 600 $</p>
+            </div>
+            <div class="slide-titulo">
+              <p> empanada </p>
+            </div>
+            <img src="assets/img/food1.png" />
+          </div>
+          <div class="btn-divider">
+            <ion-button class="trash">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+            <ion-button class="pencil">
+              <ion-icon slot="icon-only" name="pencil"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-slide>
+
+      </ion-slides>
+    </div> -->
+  </div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button style="--background:#FF7100;">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

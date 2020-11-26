@@ -1,0 +1,53 @@
+<ion-content class="fondo">
+  <div class="contenedor">
+    <ion-buttons slot="start" class="color">
+      <ion-back-button defaultHref="/" style="color: #fff;"></ion-back-button>
+    </ion-buttons>
+    <div class="contenedor-lateral">
+      <div class="caja-precio">
+        <div class="slide-precio">
+          <p>
+            <img src="assets/img/moneda.png" alt="">
+            {{getUser().balance}}
+          </p>
+        </div>
+      </div>
+      <div class="imagen-moneda">
+        <img src="assets/img/monedainicial2.png" class="center-image" />
+      </div>
+      <div class="caja-pasos">
+        <span class="contenedor-caja-pasos">
+          <ion-icon style="font-size: 20px;" name="help-circle"></ion-icon>
+          2/4
+        </span>
+      </div>
+    </div>
+
+    <form class="body" [formGroup]="formGroup">
+      <div class="form">
+        <h3>Sube una imagen o foto <br> del producto</h3>
+        <ion-item (click)="captureImage(1)">
+          <img style="margin: 0 auto; width: 150px;" [src]="imgSelected"
+            onerror="this.src='https://cdn4.iconfinder.com/data/icons/social-communication/142/add_photo-512.png'">
+        </ion-item>
+      </div>
+
+      <div class="form">
+        <h3>¿Cuál es el nombre del sitio <br>donde lo venden?</h3>
+        <ion-item>
+          <ion-input placeholder="Ingresa el nombre del sitio" type="text" formControlName="company"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="btn">
+        <ion-button style="margin: 0 auto; padding: 0 1rem;  height: 60px;
+       --border-radius: 23px;" class="finalUser" expand="block" shape="round" mode='ios'
+          [disabled]="formGroup.status == 'INVALID'"
+          (click)="goTo('/recomiendo-productos-paso3')">
+          SIGUIENTE
+        </ion-button>
+      </div>
+    </form>
+
+  </div>
+</ion-content>

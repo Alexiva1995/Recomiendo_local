@@ -1,0 +1,176 @@
+<ion-header class="ion-no-border">
+    <div class="cabezera">
+      <div class="cabezera-separador">
+        <div class="cabezera-principal">
+          <img (click)="goTo('/profile')" [src]="'https://valdusoft.com/recomiendo/user/avatar/'+getUser().user.photo"
+            onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'" alt="">
+          <h1 class="cabezera-titulo">Hola, {{getUser().user.name}}</h1>
+          <!-- <span>
+              <p> <strong style="font-size: 20px;">32</strong> <br> <span style="opacity: 0.9; font-size: 0.75rem;">Premios</span></p>
+            </span>
+            <span>
+              <p> <strong style="font-size: 20px;">104</strong> <br> <span style="opacity: 0.9; font-size: 0.75rem;">Mi red</span></p>
+            </span> -->
+        </div>
+        <div class="cabezera-secundaria">
+          <div>
+            <img src="assets/img/moneda-grande.png" alt="">
+            <span> {{getUser().user.balance || 0}} </span>
+          </div>
+          <!-- <div class="contenedor-barra">
+              <p style="margin: 0; text-align: right; color: #fff;">25/25</p>
+            <ion-progress-bar value="0.2" class="barra-invertida"></ion-progress-bar>
+          </div> -->
+        </div>
+      </div>
+      <div class="cabezera-terciaria">
+        <div class="cabezera-terciaria-contenedor">
+          <div class="caja">
+            <p>{{getUser().award || 0}}</p>
+            <p>Mis premios</p>
+          </div>
+          <div class="caja">
+            <p>{{getUser().myproducts_recommended || 0}}</p>
+            <p>Productos</p>
+          </div>
+          <div class="caja">
+            <p>{{getUser().red || 0}}</p>
+            <p>Mi red</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="form-input">
+    <ion-input (click)="modalbuscar()" type="text" placeholder="Buscar en Recomiendo...">
+      <ion-icon src="assets/img/icon/busqueda.svg" class="icono"></ion-icon>
+    </ion-input>
+  </div>
+  <ng-container *ngIf="question">
+    <div class="conocerte">
+      <h1 class="conocerte-titulo">¡Ayúdanos a conocerte!</h1>
+      <div class="conocerte-box">
+        <p class="conocerte-box-subtitulo">Responde a las opciones y ganes puntos</p>
+        <span class="conocerte-box-imagen">
+          <p>+150</p>
+          <img src="assets/img/moneda.png" alt="">
+        </span>
+      </div>
+    </div>
+    <div class="conocerte-tarjeta" *ngIf="question">
+      <div class="conocerte-box2" style="padding-top: 1rem;">
+        <p class="conocerte-box2-subtitulo2" style="margin: 0 auto;">{{question.question}}</p>
+        <!-- <img class="conocerte-box2-imagen2" src="assets/img/icon/compartir.svg" alt=""> -->
+      </div>
+      <div class="conocerte-menudia" style="text-align: center;">
+        <ion-radio-group [(ngModel)]="answer" *ngIf="question?.options">
+          <ion-item *ngFor="let item of question?.options;let i=index" style="--background: transparent;">
+            <ion-label style="font-size: 0.9375rem;color:#fff;font-weight: 700;">{{item}}</ion-label>
+            <ion-radio slot="start" color="success" [value]="item"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-input [(ngModel)]="answer" style="--background: #f3f3f3;
+        width: 80%;
+        border-radius: 20px;
+        margin: 0 auto;" *ngIf="!question?.options"></ion-input>
+        <ion-button color="primary" shape="round" style="margin-top: 1rem;" [disabled]="!answer" (click)="sendAswer()">
+          Enviar</ion-button>
+      </div>
+    </div>
+  </ng-container>
+  <!--   <ng-container *ngIf="!question">
+    <div class="conocerte">
+      <h1 class="conocerte-titulo">¡Aún no tenemos preguntas para ti!</h1>
+      <div class="conocerte-box">
+        <p class="conocerte-box-subtitulo">Responde a las opciones y ganes puntos</p>
+        <span class="conocerte-box-imagen">
+          <p>+150</p>
+          <img src="assets/img/moneda.png" alt="">
+        </span>
+      </div>
+    </div>
+    <div class="conocerte-tarjeta">
+      <div class="conocerte-box2">
+        <p class="conocerte-box2-subtitulo2">¿Qué tipo de comida <br>te gusta?</p>
+        <img class="conocerte-box2-imagen2" src="assets/img/icon/compartir.svg" alt="">
+      </div>
+      <div class="conocerte-menudia">
+        <div style="position: relative; overflow: hidden;">
+          <div class="conocerte-menudia-titulo">
+            <p>hamburguesa</p>
+          </div>
+          <img class="imagenmenudia" src="assets/img/hambur.png" alt="">
+        </div>
+        <div style="position: relative; overflow: hidden;">
+          <div class="conocerte-menudia-titulo">
+            <p>pizza</p>
+          </div>
+          <img class="imagenmenudia" src="assets/img/pizza.png" alt="">
+        </div>
+      </div>
+    </div>
+  </ng-container> -->
+  <div class="conocerte">
+    <h1 class="conocerte-titulo">Los más recomendados</h1>
+    <div class="conocerte-box">
+      <p class="conocerte-box-subtitulo">En los mejores puesto de comida</p>
+      <span class="conocerte-box-imagen">
+        <p style="font-size: 0.9375rem; color: #FF8800;" (click)="modalrecomendado()">Ver todos</p>
+      </span>
+    </div>
+  </div>
+  <div class="carrousel1">
+    <ion-slides [options]="slideOpts" #slide>
+      <ion-slide *ngFor="let item of products">
+        <div style="overflow: hidden; position: relative;" (click)="modalproductosdetalles(item)">
+          <div class="slide-precio">
+            <p>{{item.price}} $</p>
+          </div>
+          <div class="slide-titulo">
+            <p>{{item.name}}</p>
+          </div>
+          <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name"
+            style="max-width: 139px; max-height: 137px;min-height: 137px;min-width: 139px;border-radius: 20px;" />
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="recomendaciones">
+    <img src="assets/img/comida_favorita.jpg" class="img-banner" alt="" (click)="goTo('/recomiendo-productos')">
+    <img src="assets/img/invitar_amigo.jpg" class="img-banner" (click)="goTo('/invitations')">
+  </div>
+  <div class="conocerte">
+    <h1 class="conocerte-titulo">Premios disponibles</h1>
+    <div class="conocerte-box">
+      <p class="conocerte-box-subtitulo">Acumula puntos y reclama alguno de estos</p>
+      <span class="conocerte-box-imagen" (click)="showAwards()">
+        <p style="font-size: 0.9375rem; color: #FF8800;">Ver todos</p>
+      </span>
+    </div>
+  </div>
+  <div class="carrousel2">
+    <ion-slides [options]="slideOpts" #slide>
+      <ion-slide *ngFor="let item of awards" (click)="openModal(item)">
+        <div style="overflow: hidden; position: relative;">
+          <div class="slide-precio">
+            <p>
+              <img src="assets/img/moneda.png" alt="">
+              {{item.price}}$
+            </p>
+          </div>
+          <div class="slide-titulo2">
+            <p>{{item.name}}</p>
+          </div>
+          <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photo.name" style="    max-width: 139px;
+          max-height: 137px;
+          min-height: 137px;
+          min-width: 139px;
+          border-radius: 20px;" />
+        </div>
+      </ion-slide>
+
+    </ion-slides>
+  </div>
+</ion-content>
