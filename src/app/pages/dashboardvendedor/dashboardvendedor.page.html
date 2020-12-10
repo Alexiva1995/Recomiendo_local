@@ -2,7 +2,8 @@
   <div class="cabezera">
     <div class="cabezera-separador">
       <div class="cabezera-principal">
-        <img (click)="goTo('/profile')" [src]="'https://valdusoft.com/recomiendo/user/avatar/'+getUser().user.photo"
+        <img (click)="goTo('/profile')"
+          [src]="'https://valdusoft.com/recomiendo/company/image/'+getUser().user.companies_owner.photo_company[0].name"
           onerror="this.src='https://images-na.ssl-images-amazon.com/images/I/51e6kpkyuIL._AC_SY355_.jpg'" alt="">
         <h1 class="cabezera-titulo">Hola, {{getUser().user.name}}</h1>
         <!-- <span>
@@ -43,21 +44,20 @@
 </ion-header>
 
 <ion-content>
-  <div class="form-input">
+  <!-- <div class="form-input">
     <ion-input disabled type="text" placeholder="Buscar en Recomiendo..." (click)="openModal()">
       <ion-icon src="assets/img/icon/busqueda.svg" class="icono"></ion-icon>
     </ion-input>
-  </div>
+  </div> -->
 
-  <div class="pedidos">
+  <div class="pedidos" style="margin: 1rem 0;">
     <img src="assets/img/Grupo 8532x.png" style="width:44px; height: 44px; margin-right: 0.3rem;
-    margin-left: 5px;" alt="">
+    margin-left: 5px;border-radius: 50%;" alt="">
     <div>
       <h1>Pedidos</h1>
       <div class="alinear-pedidos">
         <p>Administra tus pedidos</p>
-        <p style="font-size: 0.9375rem; color: #FF8800;" 
-        (click)="go('/app/tabs/dashboard')">Ver todos</p>
+        <p style="font-size: 0.9375rem; color: #FF8800;" (click)="go('/app/tabs/dashboard')">Ver todos</p>
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@
     <div class="notification-list-item">
       <ion-list *ngIf="option == 'friends'">
         <ng-container *ngIf="option =='friends' && pedidos.length != 0">
-          <ion-item *ngFor="let item of pedidos">
+          <ion-item lines="none" *ngFor="let item of pedidos">
             <div style="position: relative;">
               <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
                 <img [src]="'https://valdusoft.com/recomiendo/user/avatar/'+item.user.photo"
@@ -87,11 +87,11 @@
               <h3 style="font-size: 18px;">{{item.user.name}}</h3>
               <p style="color: #FF5A31; font-size: 15px;">
                 ID: {{item.purchase_details[0].purchase_id}}</p>
-              <p class="btn-food" (click)="go('/app/tabs/dashboard')">Ver pedido</p>
+              <p class="btn-food" (click)="openModal(item)">Ver pedido</p>
             </ion-label>
           </ion-item>
         </ng-container>
-        <ion-item *ngIf="option =='friends' && pedidos.length == 0">
+        <ion-item lines="none" *ngIf="option =='friends' && pedidos.length == 0">
           <p>
             Aun no posee pedidos
           </p>
@@ -99,7 +99,7 @@
       </ion-list>
       <ion-list *ngIf="option == 'enemies'">
         <ng-container *ngIf="option =='enemies' && procesado.length != 0">
-          <ion-item *ngFor="let item of procesado">
+          <ion-item lines="none" *ngFor="let item of procesado">
             <div style="position: relative;">
               <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
                 <img [src]="'https://valdusoft.com/recomiendo/user/avatar/'+item.user.photo"
@@ -111,11 +111,11 @@
               <h3 style="font-size: 18px;">{{item.user.name}}</h3>
               <p style="color: #FF5A31; font-size: 15px;">
                 ID: {{item.purchase_details[0].purchase_id}}</p>
-              <p class="btn-food" (click)="go('/app/tabs/dashboard')">Ver pedido</p>
+              <p class="btn-food" (click)="openModal(item)">Ver pedido</p>
             </ion-label>
           </ion-item>
         </ng-container>
-        <ion-item *ngIf="option =='enemies' && procesado.length == 0">
+        <ion-item lines="none" *ngIf="option =='enemies' && procesado.length == 0">
           <p>
             Aun no posee pedidos
           </p>

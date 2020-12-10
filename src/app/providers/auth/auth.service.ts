@@ -107,6 +107,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       let observer:Observable<any> = this.api.post('api/auth/admin/company/add-photo', data, true);
       observer.subscribe((res: any) => {
+        console.log(res)
         resolve(res);
       }, err => {
         reject(err);

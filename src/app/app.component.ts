@@ -18,7 +18,7 @@ import { Storage } from "@ionic/storage";
 import { UserData } from "./providers/user-data";
 import { PermissionsService } from "./providers/permissions/permissions.service";
 
-/* import { OneSignal } from '@ionic-native/onesignal/ngx'; */
+import { OneSignal } from "@ionic-native/onesignal/ngx";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -54,7 +54,8 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private storage: Storage,
     private userData: UserData,
-    /* private oneSignal: OneSignal, */
+    private oneSignal: OneSignal,
+    /**/
     /*   private swUpdate: SwUpdate, */
     private toastCtrl: ToastController,
     private permission: PermissionsService,
@@ -92,12 +93,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-      const modal = await this.modalCtrl.create({
-        component: SplashPage,
-      });
-      return await modal.present();
-      /*      this.permission.locationStatus().then(
+      this.permission.locationStatus().then(
         async (res) => {
           let result = await this.permission.checkLocationEnabled();
           console.log(result);
@@ -105,10 +101,21 @@ export class AppComponent implements OnInit {
         (err) => {
           console.log("prueba", err);
         }
-      ); */
-      /*   this.oneSignal.startInit("5c96e755-64ea-4b9f-834d-21973c70d45e", "65764984501")
-      .inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification)
-      .endInit(); */
+      );
+      this.oneSignal
+        .startInit("5c96e755-64ea-4b9f-834d-21973c70d45e", "65764984501")
+        .inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification)
+        .endInit();
+      this.oneSignal.getIds().then((identity) => {
+        console.log(identity);
+        localStorage.setItem("pushToken", identity.pushToken);
+        localStorage.setItem("pushIdToken", identity.userId);
+      });
+
+      const modal = await this.modalCtrl.create({
+        component: SplashPage,
+      });
+      return await modal.present();
     });
   }
 

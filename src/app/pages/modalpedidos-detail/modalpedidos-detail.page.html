@@ -20,48 +20,49 @@
   margin: 7px 1rem;">
     <div style="position: relative;">
       <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
-        <img src="assets/img/icon/usuario.png">
+        <img [src]="'https://valdusoft.com/recomiendo/user/avatar/'+pedido.user.photo"
+        style="border-radius: 50%;
+        margin-top: 5px;"
+        onerror="'assets/img/icon/usuario.png'">
       </ion-thumbnail>
     </div>
     <ion-label>
-      <h3 style="font-size: 18px;">Mariac12</h3>
-      <p style="color: #FF5A31; font-size: 15px;">ID: 12533658</p>
+      <h3 style="font-size: 18px;">{{pedido.user.name}}</h3>
+      <p style="color: #FF5A31; font-size: 15px;">ID: {{pedido.purchase_details[0].purchase_id}}</p>
       <p style="    color: #FF5A31;
       font-size: 1.2rem;
       position: absolute;
       right: 1rem;
-      bottom: 1rem;">28.000$</p>
+      bottom: 1rem;">{{pedido.purchase_details[0].product.price}}$</p>
       <!--  <p class="btn-food">Ver pedido</p> -->
     </ion-label>
   </ion-item>
   <div class="titulo-columna">
     <p style="    position: relative;
-    right: 1.5rem;
-">Producto</p>
+    right: 1.5rem;">Producto</p>
     <p>Cantidad</p>
     <p>Precio</p>
   </div>
 
   <ion-list style="padding: 0;">
     <ion-item lines="full">
-      <!-- *ngFor="let item of products || [1, 2 , 3]" -->
       <ion-thumbnail slot="start" style="margin-right: 0.5rem;
       height:47px;
       width: 57px;
       margin-bottom: 1rem;">
-        <img [src]="'https://valdusoft.com/recomiendo/product/image/'+item.photos[0].name"
+        <img [src]="'https://valdusoft.com/recomiendo/product/image/'+pedido.purchase_details[0].product.photos[0].name"
           style="width: 57px; height: 57px;border-radius: 5px;" />
       </ion-thumbnail>
       <ion-label>
         <div class="columna-dividir">
-          <pre style="width: 66px;"><!-- {{item.name | titlecase}} -->asdasda</pre>
+          <p style="width: 66px;"> {{pedido.purchase_details[0].product.name}} </p>
           <p style="right: 2rem;
           position: relative;">
-            <!--     {{item.quantity}} -->99
+             {{pedido.purchase_details[0].quantity}}
           </p>
           <p style="position: relative;
           right: 2rem;">
-            <!--  {{item.price * item.quantity}} -->9999$
+             {{pedido.purchase_details[0].product.price * pedido.purchase_details[0].quantity}} 
           </p>
         </div>
       </ion-label>
@@ -75,10 +76,10 @@
   width: 89%;
   margin-bottom: 1rem;
   --border-radius: 20px;
-  --background: #FF7100;" expand="block" shape="round" class="finalUser second" mode='ios'>Aceptar
+  --background: #FF7100;"  (click)="aceptar()" expand="block" shape="round" class="finalUser second" mode='ios'>Aceptar
     <ion-ripple-effect type="unbounded"></ion-ripple-effect>
   </ion-button>
-  <ion-button style="margin: 0 auto; height: 49px; color: black; width: 89%; 
+  <ion-button (click)="rechazar()"  style="margin: 0 auto; height: 49px; color: black; width: 89%; 
   --border-radius: 20px; --background:#EAEAEA ;" expand="block" shape="round" class="finalUser second" mode='ios'>
     Rechazar
     <ion-ripple-effect type="unbounded"></ion-ripple-effect>

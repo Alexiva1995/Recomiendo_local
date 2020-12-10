@@ -255,6 +255,7 @@
 }
 
 .pedidos {
+  margin-top: 10px;
   display: flex;
   h1 {
     font-size: 1.25rem;
@@ -300,4 +301,9 @@
   &-item {
     padding: 1rem;
   }
+}
+
+.carrousel2 {
+  padding-bottom: 1.5rem;
+  margin-left: calc(-9vw - 1%);
 }

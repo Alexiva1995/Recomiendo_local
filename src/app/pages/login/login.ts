@@ -43,6 +43,8 @@ export class LoginPage {
         Validators.compose([Validators.required, Validators.minLength(6)]),
       ],
       remember_me: [true],
+      pushToken: [localStorage.getItem("pushToken")],
+      pushIdToken: [localStorage.getItem("pushIdToken")],
     });
   }
 
@@ -61,7 +63,13 @@ export class LoginPage {
     } else {
       try {
         // Iniciamos la consulta
-        this.service.signIn(data).then(
+        this.errorControl.pushToken.setValue(localStorage.getItem("pushToken")),
+          this.errorControl.pushIdToken.setValue(
+            localStorage.getItem("pushIdToken")
+          ),
+          console.log("Logueando", this.formGroup.value);
+
+        this.service.signIn(this.formGroup.value).then(
           (res: any) => {
             //Almacenamos en local storage el nombre del usuario
             console.log("todo lo que se recibe al logear", res);
@@ -73,9 +81,6 @@ export class LoginPage {
             //this.notification.handlerNotifications();
             this.utilities.dismissLoading();
             this.getUser();
-
-    
-        
           },
           (e) => {
             //En caso de error
@@ -108,7 +113,7 @@ export class LoginPage {
     // Iniciamos la consulta
     await this.auth.getUser().then(
       (res) => {
-        console.log("todo lo del usuario" , res)
+        console.log("todo lo del usuario", res);
         localStorage.setItem("user", JSON.stringify(res));
         this.navCtrl.navigateRoot("/app/tabs/home");
       },

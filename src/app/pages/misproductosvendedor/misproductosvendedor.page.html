@@ -37,8 +37,8 @@
               20px;" />
           </div>
           <div class="btn-divider">
-            <ion-button class="trash">
-              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            <ion-button class="trash" (click)="Remove(item)">
+              <ion-icon slot="icon-only" name="trash" ></ion-icon>
             </ion-button>
             <ion-button class="pencil" (click)="edit(item)">
               <ion-icon slot="icon-only" name="pencil"></ion-icon>
@@ -118,7 +118,7 @@
     </div> -->
   </div>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button style="--background:#FF7100;">
+    <ion-fab-button style="--background:#FF7100;" (click)="goTo('/app/tabs/order')">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

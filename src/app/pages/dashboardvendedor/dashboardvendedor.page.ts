@@ -44,6 +44,7 @@ export class DashboardvendedorPage implements OnInit {
     this.service.getMyProducts(this.getUser().user).then(
       (res) => {
         this.myProducts = res["myproducts"];
+        // console.log(this.myProducts)
       },
       (err) => {}
     );
@@ -61,16 +62,17 @@ export class DashboardvendedorPage implements OnInit {
 
   getPedidos() {
     // new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
+    // "2020/11/19"
     let params = {
-      company_id : this.getUser().user.company_id,
-      date: "2020/11/19",
+      company_id : this.getUser().user.companies_owner.id,
+      date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
     }
     this.utilities.displayLoading();
     this.servicePedido.getOrders(params).then(
       (res) => {
         console.log(res)
         const pedido = res["Orders"];
-        this.pedidos = pedido.filter(resp=>resp.status === 0)
+        this.pedidos = pedido.filter(resp=>resp.status === 0) //0
         this.procesado = pedido.filter(resp=>resp.status === 2) 
         this.utilities.dismissLoading()
         console.log("valores retornado",this.pedidos)
@@ -94,18 +96,6 @@ export class DashboardvendedorPage implements OnInit {
       },
     });
     return await modal.present();
-    /*    <ion-item *ngIf="item.status == 1">
-              <div style="position: relative;">
-                <ion-thumbnail slot="start" style="margin-right: 1rem;margin-bottom: 1rem; margin-top: 0;">
-                  <img src="assets/img/icon/usuario.png">
-                </ion-thumbnail>
-              </div>
-              <ion-label>
-                <h3 style="font-size: 18px;">Mariac12</h3>
-                <p style="color: #FF5A31; font-size: 15px;">ID: 12533658</p>
-                <p class="btn-food">Ver pedido</p>
-              </ion-label>
-            </ion-item> */
   }
 
   go(url){

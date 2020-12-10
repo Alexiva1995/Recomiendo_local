@@ -99,7 +99,7 @@ ion-item {
   border-radius: 6px;
 }
 .titulo-carrousel {
-  margin-left: 1.5rem;
+  margin-left: 1.1rem;
   font-size: 20px;
 }
 
@@ -109,4 +109,9 @@ ion-item {
 }
 .pencil {
   --background: #ff7100;
+}
+
+.carrousel1{
+  padding-bottom: 1.5rem;
+  margin-left: calc(-9vw - 1%);
 }

@@ -45,9 +45,10 @@ export class AdministrarpedidosvendedorPage implements OnInit {
     this.util.displayLoading();
     // params
     // new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
+    // "2020/11/19"
     let params = {
-      company_id : this.user.user.company_id,
-      date: "2020/11/19",
+      company_id : this.user.user.companies_owner.id,
+      date: new Date().toJSON().slice(0, 10).replace(/-/g, "/"),
     }
 
     this.service.getOrders(params).then(
@@ -76,7 +77,7 @@ export class AdministrarpedidosvendedorPage implements OnInit {
       (res) => {
         console.log("que retorna,", res);
         this.util.dismissLoading();
-        this.ngOnInit()
+        this.ionViewDidEnter()
       },
       (err) => {
         this.util.dismissLoading();

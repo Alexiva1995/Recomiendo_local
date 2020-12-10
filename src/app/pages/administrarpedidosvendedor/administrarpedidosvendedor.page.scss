@@ -32,52 +32,49 @@ p {
   letter-spacing: 0px;
   color: #c0c0c0;
   /*   padding: 0 40px; */
-    font-size: .8rem;
-    b {
-      color: var(--ion-text-color, #000000);
-    }
+  font-size: 0.8rem;
+  b {
+    color: var(--ion-text-color, #000000);
   }
-  
-  ion-content {
-    // --background: linear-gradient(90deg, rgba(255, 36, 36, 1) 0%, rgba(255, 187, 0, 1) 80%);
-    --background: url(../../../assets/img/bg-recomendar.png) no-repeat center center / cover;
-    padding: .5rem;
-  }
-  
-  ion-slides {
-    height: 95%;
-    background: white;
-    // border-top-right-radius: 30px;
-    // border-top-left-radius: 30px;
-    box-shadow: 0px -3px 15px #00000029;
-    overflow-y: scroll;
-  
-    .swiper-pagination{
-      position: relative !important;
-      margin: 0 auto;
-      width: 100%;
-    }
-  }
-  
-  
-  ion-title {
-    color: white;
-    font: Regular 21px/26px Quicksand;
-    letter-spacing: 0px;
-    color: #FFFFFF;
-  }
-  
-  
-  ion-button {
-    --ion-color-base: white !important;
-    margin: 0.5rem .5rem;
-  }
+}
 
+ion-content {
+  // --background: linear-gradient(90deg, rgba(255, 36, 36, 1) 0%, rgba(255, 187, 0, 1) 80%);
+  --background: url(../../../assets/img/bg-recomendar.png) no-repeat center
+    center / cover;
+  padding: 0.5rem;
+}
 
-  ion-col{
-    padding-bottom: 2rem;
+ion-slides {
+  height: 95%;
+  background: white;
+  // border-top-right-radius: 30px;
+  // border-top-left-radius: 30px;
+  box-shadow: 0px -3px 15px #00000029;
+  overflow-y: scroll;
+
+  .swiper-pagination {
+    position: relative !important;
+    margin: 0 auto;
+    width: 100%;
   }
+}
 
+ion-title {
+  color: white;
+  font: Regular 21px/26px Quicksand;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+
+ion-button {
+  --ion-color-base: white !important;
+  margin: 0.5rem 0.5rem;
+}
+
+ion-col {
+  padding-bottom: 2rem;
+}
 
 ion-slides {
   height: 95%;

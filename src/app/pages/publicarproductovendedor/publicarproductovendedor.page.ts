@@ -23,6 +23,8 @@ export class PublicarproductovendedorPage implements OnInit {
   categories: any = [];
   imgSelected: any;
   product: any = [];
+  edit: any = [];
+  
 
   constructor(
     private fb: FormBuilder,
@@ -32,38 +34,48 @@ export class PublicarproductovendedorPage implements OnInit {
     private camera: Camera,
     private route: ActivatedRoute
   ) {
-    this.user = JSON.parse(localStorage.getItem("user"));
-
-    this.form = this.fb.group({
-      company_id: [this.user.user.company_id, Validators.required],
-      name: ["", Validators.required],
-      description: [this.product.description || "", Validators.required],
-      subcategories: this.fb.array([]),
-      price: ["", Validators.required],
-      photo: ["", Validators.required],
-    });
+        this.user = JSON.parse(localStorage.getItem("user"));
+        this.form = this.fb.group({
+          company_id: [this.user.user.companies_owner.id, Validators.required],
+          name: ["", Validators.required],
+          description: ["", Validators.required],
+          subcategories: this.fb.array([],Validators.required),
+          price: ["", Validators.required],
+          product_id: [""],
+          photo: ["", Validators.required],
+        });
   }
 
   ngOnInit() {
+
     this.subcategories();
+  }
+
+  ionViewDidEnter(){
     this.fillForm();
   }
 
+
   fillForm() {
     this.route.queryParams.subscribe((res) => {
-      let product = res;
-      console.log(product.data);
-      if (product.data) {
-        this.form = this.fb.group({
-          company_id: [this.user.user.company_id, Validators.required],
-          name: [product.data.name || "", Validators.required],
-          description: [product.data.description || "", Validators.required],
-          subcategories: this.fb.array([]),
-          price: [product.data.price || "", Validators.required],
-          photo: [product.data.photo || "", Validators.required],
-        });
+      this.edit = res.data;
+      console.log(this.edit)
+
+      if (this.edit){
+        this.form.controls.company_id.setValue(this.edit.company_id || "")
+        this.form.controls.product_id.setValue(this.edit.id || "")
+        this.form.controls.name.setValue(this.edit.name || "")
+        this.form.controls.description.setValue(this.edit.description || "")
+        this.form.controls.price.setValue(this.edit.price || "")
+        this.form.controls.photo.setValue( this.edit.photos[0].name || "")
       }
+
+      if(this.edit.photos[0].name){
+        this.imgSelected = `https://valdusoft.com/recomiendo/product/image/${this.edit.photos[0].name}`
+      }
+
     });
+
   }
 
   getcategoryForms() {
@@ -92,17 +104,32 @@ export class PublicarproductovendedorPage implements OnInit {
   }
 
   async saveData() {
-    this.utilities.displayLoading();
-    const data: any = await this.service.AddMyProduct(this.form.value);
-    if (data) {
-      this.utilities.dismissLoading();
-      // imagen
-      const { Product_id } = data;
-      this.uploadphoto(Product_id);
-    } else {
-      this.utilities.dismissLoading();
-      this.utilities.displayToastButtonTime("ocurrio un error");
+    if(this.edit){
+      this.utilities.displayLoading();
+      const data: any = await this.service.EditMyProduct(this.form.value);
+      if (data) {
+        this.utilities.dismissLoading();
+        // imagen
+        const { id } = data;
+        this.uploadphoto(id);
+      } else {
+        this.utilities.dismissLoading();
+        this.utilities.displayToastButtonTime("ocurrio un error");
+      }
+    }else{
+      this.utilities.displayLoading();
+      const data: any = await this.service.AddMyProduct(this.form.value);
+      if (data) {
+        this.utilities.dismissLoading();
+        // imagen
+        const { Product_id } = data;
+        this.uploadphoto(Product_id);
+      } else {
+        this.utilities.dismissLoading();
+        this.utilities.displayToastButtonTime("ocurrio un error");
+      }
     }
+    
   }
 
   seleccionarFuente() {
@@ -159,7 +186,7 @@ export class PublicarproductovendedorPage implements OnInit {
           this.imgSelected = null;
           this.imgSelected = "data:image/jpeg;base64," + imageData;
           // this.updateAvatar();
-          this.form.controls.photo.setValue(imageData);
+          this.form.controls.photo.setValue(this.imgSelected);
           // console.log("imagen" , this.imgSelected)
         }
         // this.form.controls['fotoPerfil'].setValue(imageData);
@@ -177,14 +204,29 @@ export class PublicarproductovendedorPage implements OnInit {
       photo: this.form.controls.photo.value,
     };
 
-    this.utilities.displayLoading();
-    const data: any = await this.service.AddPhotoProduct(params);
-    if (data) {
-      this.utilities.dismissLoading();
-      this.utilities.displayToastButtonTime("producto agregado!!");
-    } else {
-      this.utilities.dismissLoading();
-      this.utilities.displayToastButtonTime("ocurrio un error");
+    if(this.edit){
+      this.utilities.displayLoading();
+      const data: any = await this.service.EditPhotoProduct(params);
+      if (data) {
+        this.utilities.dismissLoading();
+        this.utilities.displayToastButtonTime("producto actualizado!!");
+      } else {
+        this.utilities.dismissLoading();
+        this.utilities.displayToastButtonTime("ocurrio un error");
+      }
+    }else{
+
+      this.utilities.displayLoading();
+      const data: any = await this.service.AddPhotoProduct(params);
+      if (data) {
+        this.utilities.dismissLoading();
+        this.utilities.displayToastButtonTime("producto agregado!!");
+      } else {
+        this.utilities.dismissLoading();
+        this.utilities.displayToastButtonTime("ocurrio un error");
+      }
+
     }
+
   }
 }

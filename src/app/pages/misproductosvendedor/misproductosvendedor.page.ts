@@ -2,6 +2,7 @@ import { ProductsService } from "./../../providers/products/products.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonSlides, NavController } from "@ionic/angular";
 import { NavigationExtras } from "@angular/router";
+import { UtilitiesService } from '../../providers/utilities/utilities.service';
 
 @Component({
   selector: "app-misproductosvendedor",
@@ -20,7 +21,9 @@ export class MisproductosvendedorPage implements OnInit {
 
   constructor(
     private service: ProductsService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private utilities: UtilitiesService,
+
   ) {}
 
   ngOnInit() {
@@ -51,4 +54,29 @@ export class MisproductosvendedorPage implements OnInit {
     };
     this.navCtrl.navigateForward("app/tabs/order", navigationExtras);
   }
+
+  async Remove(product){
+    let params = {
+      product_id:product.id,
+      status:0
+    }
+
+    this.utilities.displayLoading();
+    const data: any = await this.service.EditMyProduct(params);
+    if (data) {
+      this.utilities.dismissLoading();
+      this.utilities.displayToastButtonTime("Producto fuera del stock!");
+    } else {
+      this.utilities.dismissLoading();
+      this.utilities.displayToastButtonTime("ocurrio un error");
+    }
+
+  }
+
+
+  goTo(url) {
+    this.navCtrl.navigateForward(url);
+  }
+
+
 }

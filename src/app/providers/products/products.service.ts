@@ -59,7 +59,7 @@ export class ProductsService {
   public getMyProducts(company) {
     return new Promise((resolve, reject) => {
       let params = {
-        company_id: company.company_id,
+        company_id: company.companies_owner.id,
       };
       const seq = this.api.post("api/auth/company/product/show", params, true);
       seq.subscribe(
@@ -179,11 +179,46 @@ export class ProductsService {
     });
   }
 
+
+    // producto
+  public EditMyProduct(params) {
+    return new Promise((resolve, reject) => {
+      const seq = this.api.post("api/auth/company/product/update", params, true);
+      seq.subscribe(
+        (res: any) => {
+          resolve(res.Product);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
   // imagen producto
   public AddPhotoProduct(params) {
     return new Promise((resolve, reject) => {
       const seq = this.api.post(
         "api/auth/company/product/add-photo",
+        params,
+        true
+      );
+      seq.subscribe(
+        (res: any) => {
+          console.log(res)
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  public EditPhotoProduct(params) {
+    return new Promise((resolve, reject) => {
+      const seq = this.api.post(
+        "api/auth/company/product/update-photo",
         params,
         true
       );

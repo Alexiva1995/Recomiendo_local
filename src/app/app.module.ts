@@ -41,8 +41,8 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { RecomendadosPage } from "./recomendados/recomendados.page";
 import { ModalProductdetailsPage } from "./pages/modal-productdetails/modal-productdetails.page";
 import { ModalQrPremiosPage } from "./pages/modal-qr-premios/modal-qr-premios.page";
-import { ModalPedidofinalizadoPage } from './pages/modal-pedidofinalizado/modal-pedidofinalizado.page';
-/* import { OneSignal } from '@ionic-native/onesignal/ngx'; */
+import { ModalPedidofinalizadoPage } from "./pages/modal-pedidofinalizado/modal-pedidofinalizado.page";
+/**/ import { OneSignal } from "@ionic-native/onesignal/ngx";
 
 @NgModule({
   imports: [
@@ -91,6 +91,7 @@ import { ModalPedidofinalizadoPage } from './pages/modal-pedidofinalizado/modal-
     LocationAccuracy,
     SocialSharing,
     Clipboard,
+    OneSignal,
   ],
   bootstrap: [
     AppComponent,

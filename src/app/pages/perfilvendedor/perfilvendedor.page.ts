@@ -22,7 +22,6 @@ export class PerfilvendedorPage implements OnInit {
   user: any = [];
   imgSelected1: any;
   imgSelected2: any;
-
   @ViewChild("mapElement") mapNativeElement: ElementRef;
 
 
@@ -52,8 +51,8 @@ export class PerfilvendedorPage implements OnInit {
 
     this.avatarform = this.fb.group({
       id: [this.user.user.id, Validators.required],
-      photo: [null , Validators.required],
-      type: [null , Validators.required]
+      photo: ["", Validators.required],
+      type: ["", Validators.required]
     })
     
     this.passform = this.fb.group(
@@ -69,7 +68,8 @@ export class PerfilvendedorPage implements OnInit {
   }
 
   ngOnInit() {
-    this.imgSelected1 = 'https://valdusoft.com/recomiendo/user/avatar/' + this.user.user.photo
+    this.imgSelected2 = 'https://valdusoft.com/recomiendo/company/image/' + this.user.user.companies_owner.photo_company[1].name
+    this.imgSelected1 = 'https://valdusoft.com/recomiendo/company/image/' + this.user.user.companies_owner.photo_company[0].name
   }
   ngAfterViewInit(): void {
     this.initMap();
@@ -233,7 +233,7 @@ export class PerfilvendedorPage implements OnInit {
           //frente
           this.imgSelected1 = null;
           this.imgSelected1 = "data:image/jpeg;base64," + imageData;
-          this.avatarform.controls.photo.setValue(imageData)
+          this.avatarform.controls.photo.setValue(this.imgSelected1)
           this.avatarform.controls.type.setValue(1)
           this.updateAvatar();
           // console.log("imagen" , this.imgSelected)
@@ -241,9 +241,9 @@ export class PerfilvendedorPage implements OnInit {
 
         if (index == 2) {
           //frente
-          this.imgSelected1 = null;
-          this.imgSelected1 = "data:image/jpeg;base64," + imageData;
-          this.avatarform.controls.photo.setValue(imageData)
+          this.imgSelected2 = null;
+          this.imgSelected2 = "data:image/jpeg;base64," + imageData;
+          this.avatarform.controls.photo.setValue(this.imgSelected2)
           this.avatarform.controls.type.setValue(2)
           this.updateAvatar();
           // console.log("imagen" , this.imgSelected)
@@ -270,7 +270,7 @@ export class PerfilvendedorPage implements OnInit {
             console.log("que info", data);
             this.utilities.dismissLoading();
             this.utilities.displayToast("imagen actualizado");
-            // localStorage.setItem("user", JSON.stringify(data));
+            localStorage.setItem("user", JSON.stringify(data));
             this.route.navigateRoot(["/app/tabs/home"]);
            }else{
             this.utilities.dismissLoading();
